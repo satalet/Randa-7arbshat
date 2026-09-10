@@ -101,7 +101,7 @@
         <span id="statusText" class="text-slate-300">جارٍ فحص النظام...</span>
       </div>
 
-      <!-- زر تثبيت التطبيق على الشاشة الرئيسية للموبايل -->
+      <!-- زر تثبيت التطبيق -->
       <button id="pwaInstallBtn" onclick="installPWA()" class="hidden inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-pink-600 to-purple-600 text-white shadow-lg animate-bounce border border-pink-400/40">
         <i class="fa-solid fa-download"></i>
         <span>تثبيت التطبيق على الهاتف 📲</span>
@@ -307,7 +307,7 @@
   </div>
 
   <script>
-    // --- تسجيل الـ Service Worker وإدارة تثبيت الـ PWA ---
+    // تسجيل الـ Service Worker
     let deferredPrompt;
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -339,7 +339,7 @@
       console.log('App Installed Successfully!');
     });
 
-    // --- إدارة الحالة التشخيصية ---
+    // إدارة الحالة والتنبيهات
     function showDiagnostic(msg) {
       document.getElementById('diagnosticText').innerText = msg;
       document.getElementById('diagnosticBanner').classList.remove('hidden');
@@ -389,7 +389,7 @@
     document.getElementById('dayInput').value = days[now.getDay()];
     document.getElementById('dateInput').value = now.toLocaleDateString('ar-EG');
 
-    // تشفير محلي للـ API Key
+    // التشفير المحلي للمفتاح
     const SALT = "RandaSpecialSecret2026";
     function obfuscate(str) {
       return btoa(encodeURIComponent(str).split('').map((c, i) => String.fromCharCode(c.charCodeAt(0) ^ SALT.charCodeAt(i % SALT.length))).join(''));
@@ -422,7 +422,7 @@
     }
     function closeSettingsModal() { document.getElementById('apiModal').classList.add('hidden'); }
 
-    // الخطوط والألوان
+    // التحكم بالخطوط والألوان
     let currentInk = 'ink-blue';
     let currentFont = 'font-ruqaa';
 
@@ -440,7 +440,7 @@
       b.classList.add(inkClass);
     }
 
-    // فهرس الدروس
+    // إدارة فهرس الدروس
     function getStoredLessons() {
       return JSON.parse(localStorage.getItem('randa_notebook_lessons') || '[]');
     }
@@ -521,7 +521,7 @@
       renderArchiveList();
     }
 
-    // الرفع والضغط
+    // رفع وضغط الصورة
     function triggerUpload(inputId) {
       if (!navigator.onLine) return showDiagnostic('لا يمكنك رفع الصور بدون إنترنت.');
       if (!getApiKey()) {
@@ -592,7 +592,7 @@
       }
     }
 
-    // المعالجة الفورية المباشرة بموديل gemini-3.6-flash
+    // المعالجة المباشرة والصحيحة بالـ API بدون معاملات غير مدعومة
     async function processHandwritingFast(base64Data, apiKey) {
       const status = document.getElementById('loadingStatus');
       const msg = document.getElementById('loadingMessage');
@@ -603,13 +603,9 @@
 
       msg.innerText = 'جارٍ استخراج النص فوراً عبر (gemini-3.6-flash)... ⚡';
 
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 25000);
-
       try {
         const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent`, {
           method: 'POST',
-          signal: controller.signal,
           headers: {
             'Content-Type': 'application/json',
             'X-goog-api-key': apiKey
@@ -625,16 +621,10 @@
                   }
                 }
               ]
-            }],
-            generationConfig: {
-              thinkingConfig: {
-                thinkingBudget: 0
-              }
-            }
+            }]
           })
         });
 
-        clearTimeout(timeoutId);
         const data = await res.json();
 
         if (data.error) {
@@ -649,12 +639,7 @@
           showDiagnostic('لم يتم التعرف على النص، جربي صورة أوضح وبإضاءة جيدة.');
         }
       } catch (err) {
-        clearTimeout(timeoutId);
-        if (err.name === 'AbortError') {
-          showDiagnostic('استغرقت الاستجابة وقتاً أطول من المعتاد، يرجى المحاولة مرة أخرى.');
-        } else {
-          showDiagnostic(`فشل الاتصال: ${err.message}`);
-        }
+        showDiagnostic(`فشل الاتصال: ${err.message}`);
       } finally {
         status.classList.add('hidden');
         updateSystemStatus();
@@ -701,8 +686,7 @@ ${text}
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'X-goog-api-key': apiKey },
           body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { thinkingConfig: { thinkingBudget: 0 } }
+            contents: [{ parts: [{ text: prompt }] }]
           })
         });
         const data = await res.json();
@@ -754,8 +738,7 @@ ${text}
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 'X-goog-api-key': apiKey },
           body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { thinkingConfig: { thinkingBudget: 0 } }
+            contents: [{ parts: [{ text: prompt }] }]
           })
         });
         const data = await res.json();
