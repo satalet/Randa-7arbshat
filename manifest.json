@@ -1,13 +1,13 @@
 {
-  "name": "دفتر رندة الذكي",
-  "short_name": "دفتر رندة",
-  "description": "المساعد المدرسي الذكي لرندة لقراءة خربشات الدفاتر وترتيبها",
+  "name": "دفتر باسم الذكي",
+  "short_name": "دفتر باسم",
+  "description": "المساعد المدرسي الذكي لباسم لقراءة خربشات الدفاتر وترتيبها",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0f172a",
-  "theme_color": "#1e1b4b",
+  "theme_color": "#0f172a",
   "icons": [
     {
       "src": "assets/icons/icon-192.png",

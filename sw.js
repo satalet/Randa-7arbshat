@@ -1,4 +1,4 @@
-const CACHE_NAME = 'randa-notebook-v1';
+const CACHE_NAME = 'basem-notebook-v1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
