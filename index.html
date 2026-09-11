@@ -204,7 +204,7 @@
     </div>
   </div>
 
-  <!-- شريط الأدوات الاستعراضية الذكية لباسم -->
+  <!-- شريط العمليات التكتيكية لباسم -->
   <div class="w-full max-w-4xl bg-gradient-to-r from-blue-900/40 via-slate-800/80 to-cyan-900/40 backdrop-blur-md p-3 rounded-2xl border border-cyan-500/30 shadow-lg flex flex-wrap items-center justify-between gap-2 my-1">
     <div class="flex items-center gap-2 text-xs text-cyan-300 font-bold px-2">
       <i class="fa-solid fa-shield-halved text-base text-cyan-400"></i>
@@ -212,19 +212,16 @@
     </div>
 
     <div class="flex items-center gap-2 flex-wrap">
-      <!-- 1. رادار الامتحان -->
       <button onclick="launchExamThreatRadar()" class="bg-rose-700 hover:bg-rose-600 text-white text-xs font-bold py-2 px-3.5 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5 border border-rose-400/40">
         <i class="fa-solid fa-crosshairs text-sm text-yellow-300"></i>
         <span>رادار الامتحان 🎯</span>
       </button>
 
-      <!-- 2. كود المهمة QR -->
       <button onclick="generateMissionQR()" class="bg-purple-700 hover:bg-purple-600 text-white text-xs font-bold py-2 px-3.5 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5 border border-purple-400/40">
         <i class="fa-solid fa-qrcode text-sm text-purple-300"></i>
         <span>كود المهمة السري 📡</span>
       </button>
 
-      <!-- الميزات الأصلية -->
       <button onclick="explainCurrentLesson()" class="bg-amber-600/80 hover:bg-amber-600 text-white text-xs font-bold py-2 px-3.5 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5">
         <i class="fa-regular fa-lightbulb text-sm"></i>
         <span>شرح الفكرة 💡</span>
@@ -273,13 +270,11 @@
     </div>
   </div>
 
-  <!-- 3. واجهة المسح الليزري الفضائية (Cyber HUD Scanner Overlay) -->
+  <!-- واجهة المسح الليزري الفضائية (Cyber HUD Scanner Overlay) -->
   <div id="cyberHudOverlay" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex flex-col items-center justify-center p-4">
     <div class="relative w-full max-w-lg h-96 border-2 border-cyan-500 rounded-3xl overflow-hidden bg-slate-950/80 shadow-[0_0_50px_rgba(6,182,212,0.5)] flex flex-col justify-between p-6 font-mono-code">
-      <!-- خط الليزر المتحرك -->
       <div class="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#22d3ee] hud-laser"></div>
       
-      <!-- زوايا الاستهداف (Reticles) -->
       <div class="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-cyan-400"></div>
       <div class="absolute top-4 right-4 w-6 h-6 border-t-2 border-r-2 border-cyan-400"></div>
       <div class="absolute bottom-4 left-4 w-6 h-6 border-b-2 border-l-2 border-cyan-400"></div>
@@ -306,29 +301,24 @@
     </div>
   </div>
 
-  <!-- 4. شاشة الإنذار والتدمير الذاتي (Lockdown Mode Screen) -->
-  <div id="lockdownScreen" class="hidden fixed inset-0 z-[100] alarm-active flex flex-col items-center justify-center p-6 text-center text-white select-none">
-    <div class="max-w-md w-full bg-black/80 border-4 border-red-600 rounded-3xl p-6 shadow-[0_0_80px_rgba(239,68,68,0.9)] flex flex-col items-center space-y-5">
-      <i class="fa-solid fa-triangle-exclamation text-7xl text-red-500 animate-bounce"></i>
+  <!-- شاشة الإنذار والمهلة المحدثة (Lockdown Screen) -->
+  <div id="lockdownScreen" class="hidden fixed inset-0 z-[100] flex flex-col items-center justify-center p-6 text-center text-white select-none backdrop-blur-md">
+    <div class="max-w-md w-full bg-black/90 border-4 border-amber-500/80 rounded-3xl p-6 shadow-2xl flex flex-col items-center space-y-4">
+      <i id="lockdownIcon" class="fa-solid fa-shield-halved text-6xl text-amber-400 animate-pulse"></i>
       
-      <h2 class="text-2xl md:text-3xl font-black text-red-400 tracking-wider">
-        ⚠️ INTRUDER ALERT ⚠️
+      <h2 id="lockdownTitle" class="text-2xl font-black text-amber-400 tracking-wider">
+        ⚠️ تم رصد حركة!
       </h2>
-      <p class="text-xs font-mono-code text-red-200">
-        UNAUTHORIZED ACCESS DETECTED! BIOMETRIC PURGE INITIATED.
+      <p id="lockdownSub" class="text-xs font-mono-code text-slate-300 leading-relaxed whitespace-pre-line">
+        مطلوب فك القفل السري قبل انطلاق صفارة الإنذار!
       </p>
 
-      <div class="w-full bg-red-950/80 p-3 rounded-xl border border-red-500/50 text-amber-300 font-mono-code text-sm">
-        <div>FACIAL RECORDING: <span class="text-green-400">UPLOADING...</span></div>
-        <div class="text-xs text-slate-400 mt-1">DEVICE SYSTEM LOCKED BY COMMANDER BASEM</div>
-      </div>
-
-      <!-- كبسة فك اللغز السري -->
-      <button id="cancelAlarmBtn" onclick="handleSecretClick('btn')" class="w-full py-3.5 bg-red-700 hover:bg-red-600 active:scale-95 text-white font-extrabold rounded-2xl border-2 border-red-400 shadow-xl text-sm transition">
+      <!-- زر إلغاء الطوارئ السري -->
+      <button id="cancelAlarmBtn" onclick="handleSecretClick('btn')" class="w-full py-3.5 bg-slate-800 hover:bg-slate-700 active:scale-95 text-white font-extrabold rounded-2xl border-2 border-cyan-400 shadow-xl text-sm transition">
         إلغاء حالة الطوارئ 🔓
       </button>
 
-      <div id="secretFeedback" class="text-xs text-red-300 h-4 font-mono-code"></div>
+      <div id="secretFeedback" class="text-xs text-amber-300 h-4 font-mono-code"></div>
     </div>
   </div>
 
@@ -672,7 +662,7 @@
 
       const apiKey = getApiKey();
       const hud = document.getElementById('cyberHudOverlay');
-      hud.classList.remove('hidden'); // إطلاق شاشة الهولوغرام والليزر
+      hud.classList.remove('hidden');
       updateSystemStatus('processing');
       dismissBanner();
 
@@ -731,9 +721,7 @@
       }
     }
 
-    // ==========================================
-    // 1. ميزة رادار كشف الامتحان (Exam Threat Radar)
-    // ==========================================
+    // 1. ميزة رادار كشف الامتحان
     async function launchExamThreatRadar() {
       const apiKey = getApiKey();
       if (!apiKey) return openSettingsModal();
@@ -786,18 +774,15 @@ ${text}
       }
     }
 
-    // ==========================================
-    // 2. كود المهمة السري (Hacker QR Share)
-    // ==========================================
+    // 2. كود المهمة السري QR
     function generateMissionQR() {
       const text = document.getElementById('notebookBody').innerText.trim();
       const subject = document.getElementById('subjectInput').value.trim();
       if (!text || text.length < 5) return alert('اكتب أو امسح درساً أولاً لتوليد كود المهمة!');
 
       const qrContainer = document.getElementById('qrcodeContainer');
-      qrContainer.innerHTML = ''; // مسح القديم
+      qrContainer.innerHTML = '';
 
-      // تجهيز رابط مشفر أو نص سريع لعرضه كأنه هكر
       const missionPayload = `[TOP SECRET MISSION - BASEM]\nSUBJECT: ${subject}\n---\n${text.substring(0, 300)}...`;
       
       new QRCode(qrContainer, {
@@ -814,17 +799,38 @@ ${text}
     function closeQRModal() { document.getElementById('qrModal').classList.add('hidden'); }
 
     // ==========================================
-    // 4. نظام الفخ والإنذار باللغز السري
+    // 4. نظام الفخ المتطور: حساسية ليزرية + مهلة تحذير للقائد
     // ==========================================
     let trapArmed = false;
+    let warningActive = false;
     let alarmActive = false;
     let secretSequence = [];
-    const TARGET_SEQUENCE = ['btn', 'btn', 'title_basem', 'btn']; // لغز باسم السري
+    const TARGET_SEQUENCE = ['btn', 'btn', 'title_basem', 'btn']; // اللغز السري لباسم
 
-    // أصوات الإنذار عبر Web Audio API
+    // متغيرات قياس حركة مليمترية (Delta)
+    let lastAcc = { x: null, y: null, z: null };
+    let warningTimer = null;
+    let warningSeconds = 6;
+
+    // محرك الأصوات
     let audioCtx = null;
     let sirenOsc = null;
-    let sirenTimer = null;
+    let sirenInterval = null;
+
+    function playBeep(freq = 800, duration = 0.1) {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch(e) {}
+    }
 
     function startSirenSound() {
       try {
@@ -835,24 +841,23 @@ ${text}
         sirenOsc.type = 'sawtooth';
         sirenOsc.connect(gainNode);
         gainNode.connect(audioCtx.destination);
-        gainNode.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gainNode.gain.setValueAtTime(0.4, audioCtx.currentTime);
 
         let high = false;
-        sirenOsc.frequency.setValueAtTime(700, audioCtx.currentTime);
+        sirenOsc.frequency.setValueAtTime(750, audioCtx.currentTime);
         sirenOsc.start();
 
-        sirenTimer = setInterval(() => {
+        sirenInterval = setInterval(() => {
           if (!sirenOsc) return;
           high = !high;
-          sirenOsc.frequency.setValueAtTime(high ? 1100 : 650, audioCtx.currentTime);
-        }, 300);
-      } catch (e) {
-        console.warn('Audio not supported:', e);
-      }
+          sirenOsc.frequency.setValueAtTime(high ? 1200 : 650, audioCtx.currentTime);
+        }, 280);
+      } catch (e) {}
     }
 
-    function stopSirenSound() {
-      if (sirenTimer) clearInterval(sirenTimer);
+    function stopAllSounds() {
+      if (sirenInterval) clearInterval(sirenInterval);
+      if (warningTimer) clearInterval(warningTimer);
       if (sirenOsc) {
         try { sirenOsc.stop(); } catch (e) {}
         sirenOsc.disconnect();
@@ -864,95 +869,145 @@ ${text}
       }
     }
 
-    // تفعيل الفخ (بعد 5 ثواني)
+    // تفعيل الفخ بعد 5 ثواني
     function armEmergencyTrap() {
-      if (trapArmed) return;
+      if (trapArmed || warningActive || alarmActive) return;
       let count = 5;
-      const statusBadge = document.getElementById('statusBadge');
       const text = document.getElementById('statusText');
 
       const cd = setInterval(() => {
-        text.innerText = `⚠️ سيب الجوال! تفعيل الفخ خلال: ${count} ثواني...`;
+        text.innerText = `⚠️ حط التلفون مكانه! التثبيت خلال: ${count}...`;
+        playBeep(400, 0.05);
         count--;
         if (count < 0) {
           clearInterval(cd);
           trapArmed = true;
-          text.innerText = `🚨 الفخ نشط ومتربص! أي لمسة أو حركة ستفجر الإنذار!`;
-          setupTrapSensors();
+          lastAcc = { x: null, y: null, z: null };
+          text.innerText = `🚨 الفخ نشط وحساس لأي حركة مليمترية!`;
+          setupUltraSensitiveSensors();
         }
       }, 1000);
     }
 
-    function setupTrapSensors() {
-      // رصد أي لمسة على الشاشة
-      window.addEventListener('pointerdown', triggerLockdownAlarm, { once: true });
-      // رصد حركة الجوال (إذا حمله شخص)
+    function setupUltraSensitiveSensors() {
+      window.addEventListener('pointerdown', handleMovementDetected, { once: true });
       if (window.DeviceMotionEvent) {
-        window.addEventListener('devicemotion', handleMotionDetection);
+        window.addEventListener('devicemotion', handleMotionCheck);
       }
     }
 
-    function handleMotionDetection(event) {
-      if (!trapArmed || alarmActive) return;
+    // رصد أي حركة دقيقة جداً
+    function handleMotionCheck(event) {
+      if (!trapArmed || warningActive || alarmActive) return;
       const acc = event.accelerationIncludingGravity;
-      if (acc && (Math.abs(acc.x) > 13 || Math.abs(acc.y) > 13)) {
-        triggerLockdownAlarm();
+      if (!acc) return;
+
+      if (lastAcc.x !== null) {
+        const deltaX = Math.abs(acc.x - lastAcc.x);
+        const deltaY = Math.abs(acc.y - lastAcc.y);
+        const deltaZ = Math.abs(acc.z - lastAcc.z);
+
+        if (deltaX > 1.2 || deltaY > 1.2 || deltaZ > 1.2) {
+          handleMovementDetected();
+          return;
+        }
       }
+
+      lastAcc = { x: acc.x, y: acc.y, z: acc.z };
     }
 
-    function triggerLockdownAlarm() {
-      if (!trapArmed || alarmActive) return;
-      alarmActive = true;
+    // المرحلة الأولى: التحذير والمهلة الذكية (Grace Warning)
+    function handleMovementDetected() {
+      if (!trapArmed || warningActive || alarmActive) return;
       trapArmed = false;
-      secretSequence = []; // تصفير المحاولات
+      warningActive = true;
+      secretSequence = [];
 
-      // إزالة المستشعرات
-      window.removeEventListener('devicemotion', handleMotionDetection);
+      window.removeEventListener('devicemotion', handleMotionCheck);
 
-      // إظهار شاشة الرعب
-      document.getElementById('lockdownScreen').classList.remove('hidden');
+      const screen = document.getElementById('lockdownScreen');
+      screen.classList.remove('hidden');
+      screen.classList.remove('alarm-active');
+      screen.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
 
-      // تشغيل الصوت والرجّاج
+      warningSeconds = 6;
+      updateWarningUI();
+
+      warningTimer = setInterval(() => {
+        warningSeconds--;
+        playBeep(900, 0.06);
+        if (navigator.vibrate) navigator.vibrate(60);
+
+        if (warningSeconds <= 0) {
+          clearInterval(warningTimer);
+          triggerFullSirenAlarm();
+        } else {
+          updateWarningUI();
+        }
+      }, 1000);
+    }
+
+    function updateWarningUI() {
+      document.getElementById('lockdownIcon').className = "fa-solid fa-shield-halved text-6xl text-amber-400 animate-pulse";
+      document.getElementById('lockdownTitle').innerText = `⚠️ تم رصد حركة التلفون!`;
+      document.getElementById('lockdownTitle').className = "text-xl md:text-2xl font-black text-amber-400 tracking-wider";
+      document.getElementById('lockdownSub').innerText = `مطلوب مصادقة القائد باسم فوراً لإلغاء القفل\nالمهلة المتبقية: 0${warningSeconds} ثانية!`;
+      document.getElementById('secretFeedback').innerText = `أدخل كود فك القفل التكتيكي...`;
+    }
+
+    // المرحلة الثانية: تفجير الإنذار والرعب الكامل بعد انتهاء المهلة
+    function triggerFullSirenAlarm() {
+      warningActive = false;
+      alarmActive = true;
+
+      const screen = document.getElementById('lockdownScreen');
+      screen.classList.add('alarm-active');
+      screen.style.backgroundColor = '';
+
+      document.getElementById('lockdownIcon').className = "fa-solid fa-triangle-exclamation text-6xl text-red-500 animate-bounce";
+      document.getElementById('lockdownTitle').innerText = `🚨 INTRUDER ALERT 🚨`;
+      document.getElementById('lockdownTitle').className = "text-2xl md:text-3xl font-black text-red-500 tracking-wider";
+      document.getElementById('lockdownSub').innerText = `انتهت المهلة! محاولة تطفل غير مصرح بها!\nجاري تسجيل الوجه وبث الإنذار...`;
+
       startSirenSound();
       if (navigator.vibrate) {
-        navigator.vibrate([300, 150, 300, 150, 500, 200, 500]);
+        navigator.vibrate([400, 200, 400, 200, 800]);
       }
     }
 
-    // فك اللغز السري
+    // إدخال اللغز وفك الطوارئ
     function handleSecretClick(elementId) {
-      if (!alarmActive) return;
+      if (!warningActive && !alarmActive) return;
 
       secretSequence.push(elementId);
       const fb = document.getElementById('secretFeedback');
 
-      // مطابقة التسلسل خطوة بخطوة
       const currentIndex = secretSequence.length - 1;
       if (secretSequence[currentIndex] !== TARGET_SEQUENCE[currentIndex]) {
-        // إذا أخطأ المتطفل، يرجع للصفر
         secretSequence = [];
-        fb.innerText = "ACCESS DENIED - CODE RESET ✕";
-        if (navigator.vibrate) navigator.vibrate(100);
+        fb.innerText = "رمز خاطئ - أعد التسلسل! ✕";
+        playBeep(300, 0.15);
         return;
       }
 
-      fb.innerText = `PROGRESS: ${secretSequence.length} / 4`;
+      fb.innerText = `تم التحقق: ${secretSequence.length} / 4 ✓`;
+      playBeep(1200, 0.08);
 
-      // إذا اكتمل التسلسل بنجاح!
       if (secretSequence.length === TARGET_SEQUENCE.length) {
         disarmLockdownSuccess();
       }
     }
 
     function disarmLockdownSuccess() {
-      stopSirenSound();
+      stopAllSounds();
+      warningActive = false;
       alarmActive = false;
       trapArmed = false;
       secretSequence = [];
 
       document.getElementById('lockdownScreen').classList.add('hidden');
       updateSystemStatus();
-      alert("🟢 [ACCESS GRANTED]\nأهلاً بعودتك يا قائد باسم، تم فك وضع الطوارئ والسيطرة على النظام!");
+      alert("🟢 [COMMAND OVERRIDE SUCCESS]\nتم إلغاء الإنذار وتأكيد هوية القائد باسم بنجاح!");
     }
 
     // الميزات الدراسية الذكية
