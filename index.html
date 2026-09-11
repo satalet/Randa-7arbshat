@@ -84,11 +84,28 @@
     }
     .hud-laser { animation: scanLaser 2s linear infinite alternate; }
 
-    @keyframes emergencyFlash {
-      0%, 100% { background-color: #450a0a; }
-      50% { background-color: #000000; }
+    /* أنيميشن الرعب الدموي الصارخ */
+    @keyframes terrorFlash {
+      0%, 100% { background-color: #000000; }
+      40% { background-color: #580000; }
+      60% { background-color: #880808; }
     }
-    .alarm-active { animation: emergencyFlash 0.35s infinite; }
+    .alarm-active {
+      animation: terrorFlash 0.3s infinite;
+    }
+
+    /* تشويش ورجة رعب (Glitch Shake) */
+    @keyframes terrorShake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      20% { transform: translate(-2px, -2px) rotate(-1deg); }
+      40% { transform: translate(-1px, 2px) rotate(1deg); }
+      60% { transform: translate(2px, 1px) rotate(0deg); }
+      80% { transform: translate(1px, -2px) rotate(-1deg); }
+      100% { transform: translate(-1px, 1px) rotate(0deg); }
+    }
+    .terror-shake {
+      animation: terrorShake 0.15s infinite;
+    }
   </style>
 </head>
 <body class="p-3 md:p-8 flex flex-col items-center">
@@ -117,7 +134,7 @@
     </div>
     
     <h1 class="text-3xl md:text-5xl font-extrabold text-white basem-neon tracking-wide select-none">
-      دَفْتَرُ <span onclick="handleSecretClick('title_basem')" class="cursor-pointer underline decoration-cyan-500/30">بَاسِم</span> الذَّكِي ⚡
+      دَفْتَرُ بَاسِم الذَّكِي ⚡
     </h1>
     <p class="text-gray-300 text-sm md:text-base mt-2">
       منظومة التحليل المدرسي واستخراج الخربشات فائقة السرعة
@@ -282,26 +299,44 @@
     </div>
   </div>
 
-  <!-- شاشة الإنذار والمهلة - كلمة باسم واضحة وصريحة داخل الكرت -->
-  <div id="lockdownScreen" class="hidden fixed inset-0 z-[100] flex flex-col items-center justify-center p-6 text-center text-white select-none backdrop-blur-md">
-    <div class="max-w-md w-full bg-slate-950/95 border-4 border-amber-500/80 rounded-3xl p-6 shadow-[0_0_50px_rgba(245,158,11,0.3)] flex flex-col items-center space-y-4">
+  <!-- شاشة الإنذار والرعب الهستيري المحدثة -->
+  <div id="lockdownScreen" class="hidden fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 md:p-6 text-center text-white select-none backdrop-blur-md">
+    <div id="terrorCard" class="max-w-md w-full bg-slate-950/95 border-4 border-amber-500 rounded-3xl p-5 md:p-6 shadow-2xl flex flex-col items-center space-y-3.5 transition-all duration-300">
       
-      <!-- شعار النظام: كلمة باسم هي الكبسة السرية بداخل الكرت -->
-      <div class="w-full bg-slate-900/90 py-2 px-3 rounded-xl border border-slate-700 text-xs font-mono-code text-slate-300 flex items-center justify-center gap-1.5">
+      <!-- شعار النظام السري -->
+      <div class="w-full bg-slate-900/90 py-1.5 px-3 rounded-xl border border-slate-700 text-xs font-mono-code text-slate-300 flex items-center justify-center gap-1.5">
         <i class="fa-solid fa-shield-halved text-cyan-400"></i>
         <span>نظام أمان دَفْتَرُ</span>
         <button type="button" onclick="handleSecretClick('title_basem')" class="font-extrabold text-cyan-400 underline underline-offset-4 hover:text-cyan-200 active:scale-90 transition px-1">بَاسِم</button>
         <span>الذَّكِي ⚡</span>
       </div>
 
-      <i id="lockdownIcon" class="fa-solid fa-triangle-exclamation text-6xl text-amber-400 animate-pulse"></i>
+      <!-- الإيقونة التفاعلية -->
+      <div id="iconContainer" class="my-1">
+        <i id="lockdownIcon" class="fa-solid fa-triangle-exclamation text-6xl text-amber-400 animate-pulse"></i>
+      </div>
       
       <h2 id="lockdownTitle" class="text-xl md:text-2xl font-black text-amber-400 tracking-wider">
         ⚠️ تم رصد حركة التلفون!
       </h2>
+
+      <!-- محاكاة كاميرا المراقبة لتسجيل وجه المتطفل -->
+      <div id="cameraThreatBox" class="hidden w-full bg-red-950/90 border-2 border-red-500/80 rounded-2xl p-2.5 text-xs font-mono-code text-red-200 flex items-center justify-between shadow-inner">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-600 animate-ping"></span>
+          <span class="font-extrabold text-white">REC ● CAM_INTRUDER</span>
+        </div>
+        <span class="text-amber-300 font-bold">بث مباشر 89%...</span>
+      </div>
+
       <p id="lockdownSub" class="text-xs font-mono-code text-slate-300 leading-relaxed whitespace-pre-line">
         مطلوب فك القفل السري قبل انطلاق صفارة الإنذار!
       </p>
+
+      <!-- نص الرعب لمنع المتطفل من إغلاق التطبيق نهائياً -->
+      <div id="antiExitWarning" class="hidden w-full bg-black/90 border border-red-600 rounded-xl p-2.5 text-[11px] text-red-400 font-mono-code leading-relaxed">
+        ☠️ <strong>تحذير صارم:</strong> أي محاولة للخروج أو إطفاء الشاشة ستؤدي فوراً إلى تفعيل <strong>الفورمات التلقائي لمسح الذاكرة</strong> وإرسال الفيديو للشرطة!
+      </div>
 
       <!-- الدوائر الأربعة لتتبع التسلسل السري -->
       <div class="flex items-center gap-3 py-1">
@@ -673,10 +708,7 @@
       try {
         const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.6-flash:generateContent`, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-goog-api-key': apiKey
-          },
+          headers: { 'Content-Type': 'application/json', 'X-goog-api-key': apiKey },
           body: JSON.stringify({
             contents: [{
               parts: [
@@ -775,7 +807,7 @@ ${text}
     function closeQRModal() { document.getElementById('qrModal').classList.add('hidden'); }
 
     // ==========================================
-    // منظومة الفخ واللغز السري الدقيق
+    // منظومة الفخ والرعب العسكري المحكم
     // ==========================================
     let trapArmed = false;
     let warningActive = false;
@@ -788,7 +820,8 @@ ${text}
     let warningSeconds = 8;
 
     let audioCtx = null;
-    let sirenOsc = null;
+    let osc1 = null;
+    let osc2 = null;
     let sirenInterval = null;
 
     function playBeep(freq = 800, duration = 0.1) {
@@ -806,41 +839,47 @@ ${text}
       } catch(e) {}
     }
 
-    function startSirenSound() {
+    // صفارة إنذار عسكرية ثنائية متنافرة ومرعبة (War Klaxon)
+    function startAggressiveSiren() {
       try {
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        sirenOsc = audioCtx.createOscillator();
         const gainNode = audioCtx.createGain();
-
-        sirenOsc.type = 'sawtooth';
-        sirenOsc.connect(gainNode);
+        gainNode.gain.setValueAtTime(0.5, audioCtx.currentTime);
         gainNode.connect(audioCtx.destination);
-        gainNode.gain.setValueAtTime(0.4, audioCtx.currentTime);
 
-        let high = false;
-        sirenOsc.frequency.setValueAtTime(750, audioCtx.currentTime);
-        sirenOsc.start();
+        osc1 = audioCtx.createOscillator();
+        osc2 = audioCtx.createOscillator();
+
+        osc1.type = 'sawtooth';
+        osc2.type = 'square';
+
+        osc1.connect(gainNode);
+        osc2.connect(gainNode);
+
+        let toggle = false;
+        osc1.frequency.setValueAtTime(850, audioCtx.currentTime);
+        osc2.frequency.setValueAtTime(870, audioCtx.currentTime); // تردد متنافر مرعب
+
+        osc1.start();
+        osc2.start();
 
         sirenInterval = setInterval(() => {
-          if (!sirenOsc) return;
-          high = !high;
-          sirenOsc.frequency.setValueAtTime(high ? 1200 : 650, audioCtx.currentTime);
-        }, 280);
+          if (!osc1 || !osc2) return;
+          toggle = !toggle;
+          osc1.frequency.setValueAtTime(toggle ? 1300 : 500, audioCtx.currentTime);
+          osc2.frequency.setValueAtTime(toggle ? 1330 : 520, audioCtx.currentTime);
+        }, 220);
       } catch (e) {}
     }
 
     function stopAllSounds() {
       if (sirenInterval) clearInterval(sirenInterval);
       if (warningTimer) clearInterval(warningTimer);
-      if (sirenOsc) {
-        try { sirenOsc.stop(); } catch (e) {}
-        sirenOsc.disconnect();
-        sirenOsc = null;
-      }
-      if (audioCtx) {
-        try { audioCtx.close(); } catch (e) {}
-        audioCtx = null;
-      }
+      try {
+        if (osc1) { osc1.stop(); osc1.disconnect(); osc1 = null; }
+        if (osc2) { osc2.stop(); osc2.disconnect(); osc2 = null; }
+        if (audioCtx) { audioCtx.close(); audioCtx = null; }
+      } catch(e) {}
     }
 
     function resetDots() {
@@ -921,6 +960,10 @@ ${text}
       screen.classList.remove('alarm-active');
       screen.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
 
+      document.getElementById('cameraThreatBox').classList.add('hidden');
+      document.getElementById('antiExitWarning').classList.add('hidden');
+      document.getElementById('terrorCard').classList.remove('terror-shake');
+
       warningSeconds = 8;
       updateWarningUI();
 
@@ -946,21 +989,44 @@ ${text}
       document.getElementById('secretFeedback').innerText = `أدخل التسلسل السري بالترتيب...`;
     }
 
+    // تفجير الرعب الكامل + قفل الشاشة ومنع الخروج
     function triggerFullSirenAlarm() {
       warningActive = false;
       alarmActive = true;
+
+      // 1. طلب ملء الشاشة لإخفاء أزرار الجوال
+      try {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        }
+      } catch(e) {}
+
+      // 2. تفعيل مانع إغلاق الصفحة بالنظام
+      window.onbeforeunload = function() {
+        return "⚠️ تحذير أمني خطير: الخروج سيؤدي لمسح ذاكرة الجهاز فوراً!";
+      };
 
       const screen = document.getElementById('lockdownScreen');
       screen.classList.add('alarm-active');
       screen.style.backgroundColor = '';
 
-      document.getElementById('lockdownIcon').className = "fa-solid fa-skull-crossbones text-6xl text-red-500 animate-bounce";
-      document.getElementById('lockdownTitle').innerText = `🚨 INTRUDER ALERT 🚨`;
-      document.getElementById('lockdownTitle').className = "text-2xl md:text-3xl font-black text-red-500 tracking-wider";
-      document.getElementById('lockdownSub').innerText = `انتهت المهلة! محاولة تطفل غير مصرح بها!\nجاري تسجيل الوجه وبث الإنذار...`;
+      const card = document.getElementById('terrorCard');
+      card.classList.add('terror-shake');
+      card.className = "max-w-md w-full bg-black/95 border-4 border-red-600 rounded-3xl p-5 md:p-6 shadow-[0_0_80px_#ef4444] flex flex-col items-center space-y-3 terror-shake";
 
-      startSirenSound();
-      if (navigator.vibrate) navigator.vibrate([400, 200, 400, 200, 800]);
+      document.getElementById('lockdownIcon').className = "fa-solid fa-skull text-7xl text-red-500 animate-bounce";
+      document.getElementById('lockdownTitle').innerText = `☠️ اختراق أمني محظور ☠️`;
+      document.getElementById('lockdownTitle').className = "text-2xl md:text-3xl font-black text-red-500 tracking-widest";
+      document.getElementById('lockdownSub').innerText = `انتهت المهلة! تم رصد متطفل غير مصرح به!\nجاري قفل اللوحة الأم والتحضير لمسح البيانات...`;
+
+      // إظهار كرت الكاميرا وتحذير الفورمات
+      document.getElementById('cameraThreatBox').classList.remove('hidden');
+      document.getElementById('antiExitWarning').classList.remove('hidden');
+
+      startAggressiveSiren();
+      if (navigator.vibrate) {
+        navigator.vibrate([300, 100, 300, 100, 600, 150, 800, 200, 1000]);
+      }
     }
 
     function handleSecretClick(elementId) {
@@ -973,9 +1039,9 @@ ${text}
       if (secretSequence[currentIndex] !== TARGET_SEQUENCE[currentIndex]) {
         secretSequence = [];
         resetDots();
-        fb.innerText = "تسلسل خاطئ - أعد المحاولة! ✕";
+        fb.innerText = "رمز خاطئ - أعد المحاولة! ✕";
         playBeep(250, 0.15);
-        if (navigator.vibrate) navigator.vibrate(100);
+        if (navigator.vibrate) navigator.vibrate(120);
         return;
       }
 
@@ -996,7 +1062,21 @@ ${text}
       secretSequence = [];
       resetDots();
 
-      document.getElementById('lockdownScreen').classList.add('hidden');
+      // إلغاء مانع الخروج
+      window.onbeforeunload = null;
+
+      // الخروج من وضع ملء الشاشة إذا كان مفعلاً
+      try {
+        if (document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        }
+      } catch(e) {}
+
+      const screen = document.getElementById('lockdownScreen');
+      screen.classList.add('hidden');
+      screen.classList.remove('alarm-active');
+      document.getElementById('terrorCard').classList.remove('terror-shake');
+
       updateSystemStatus();
       alert("🟢 [COMMAND OVERRIDE SUCCESS]\nتم إلغاء الإنذار وتأكيد هوية القائد باسم بنجاح!");
     }
