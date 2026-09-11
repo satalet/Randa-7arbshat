@@ -190,6 +190,10 @@
         <span>الفهرس</span>
       </button>
 
+      <button onclick="viewLastIntruder()" title="سجل المتسللين والصور" class="p-2.5 bg-red-800/80 hover:bg-red-700 rounded-xl text-white transition active:scale-95">
+        <i class="fa-solid fa-user-secret"></i>
+      </button>
+
       <button onclick="readAloud()" title="استماع للدرس" class="p-2.5 bg-sky-600 hover:bg-sky-500 rounded-xl text-white transition active:scale-95">
         <i class="fa-solid fa-volume-high"></i>
       </button>
@@ -297,9 +301,9 @@
     </div>
   </div>
 
-  <!-- شاشة الإنذار والرعب الهستيري المحدثة -->
+  <!-- شاشة الإنذار والرعب الهستيري + كاميرا البث المباشر للمتطفل -->
   <div id="lockdownScreen" class="hidden fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 md:p-6 text-center text-white select-none backdrop-blur-md">
-    <div id="terrorCard" class="max-w-md w-full bg-slate-950/95 border-4 border-amber-500 rounded-3xl p-5 md:p-6 shadow-2xl flex flex-col items-center space-y-3.5 transition-all duration-300">
+    <div id="terrorCard" class="max-w-md w-full bg-slate-950/95 border-4 border-amber-500 rounded-3xl p-5 md:p-6 shadow-2xl flex flex-col items-center space-y-3 transition-all duration-300">
       
       <!-- شعار النظام السري -->
       <div class="w-full bg-slate-900/90 py-1.5 px-3 rounded-xl border border-slate-700 text-xs font-mono-code text-slate-300 flex items-center justify-center gap-1.5">
@@ -309,23 +313,26 @@
         <span>الذَّكِي ⚡</span>
       </div>
 
-      <!-- الإيقونة التفاعلية -->
-      <div id="iconContainer" class="my-1">
-        <i id="lockdownIcon" class="fa-solid fa-triangle-exclamation text-6xl text-amber-400 animate-pulse"></i>
+      <!-- إطار كاميرا المتطفل المباشر -->
+      <div id="cameraThreatBox" class="relative w-full max-w-[280px] h-48 bg-black rounded-2xl border-2 border-red-500 overflow-hidden shadow-[0_0_30px_rgba(239,68,68,0.7)] flex flex-col items-center justify-center">
+        <!-- فيديو الكاميرا الأمامية المباشر -->
+        <video id="intruderLiveVideo" autoplay playsinline muted class="w-full h-full object-cover scale-x-[-1]"></video>
+        
+        <!-- ليزر استهداف على وجه المتطفل -->
+        <div class="absolute inset-4 border border-dashed border-red-500/80 rounded-lg pointer-events-none flex flex-col justify-between p-2">
+          <div class="flex justify-between text-[10px] text-red-400 font-mono-code">
+            <span class="animate-pulse">● REC LIVE</span>
+            <span>FACE_ID_MATCH</span>
+          </div>
+          <div class="text-center text-[11px] font-bold text-red-300 font-mono-code bg-red-950/80 py-0.5 rounded">
+            [INTRUDER IDENTIFIED]
+          </div>
+        </div>
       </div>
-      
+
       <h2 id="lockdownTitle" class="text-xl md:text-2xl font-black text-amber-400 tracking-wider">
         ⚠️ تم رصد حركة التلفون!
       </h2>
-
-      <!-- محاكاة كاميرا المراقبة لتسجيل وجه المتطفل -->
-      <div id="cameraThreatBox" class="hidden w-full bg-red-950/90 border-2 border-red-500/80 rounded-2xl p-2.5 text-xs font-mono-code text-red-200 flex items-center justify-between shadow-inner">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-red-600 animate-ping"></span>
-          <span class="font-extrabold text-white">REC ● CAM_INTRUDER</span>
-        </div>
-        <span class="text-amber-300 font-bold">بث مباشر 89%...</span>
-      </div>
 
       <p id="lockdownSub" class="text-xs font-mono-code text-slate-300 leading-relaxed whitespace-pre-line">
         مطلوب فك القفل السري قبل انطلاق صفارة الإنذار!
@@ -333,7 +340,7 @@
 
       <!-- نص الرعب لمنع المتطفل من إغلاق التطبيق -->
       <div id="antiExitWarning" class="hidden w-full bg-black/90 border border-red-600 rounded-xl p-2.5 text-[11px] text-red-400 font-mono-code leading-relaxed">
-        ☠️ <strong>تحذير صارم:</strong> أي محاولة للخروج أو إطفاء الشاشة ستؤدي فوراً إلى تفعيل <strong>الفورمات التلقائي لمسح الذاكرة</strong> وإرسال الفيديو للشرطة!
+        ☠️ <strong>تحذير استخباراتي:</strong> تم التقاط صورتك وحفظها بالسيرفر، أي محاولة لإغلاق التطبيق ستفعل الفورمات الشامل ومسح الجهاز فوراً!
       </div>
 
       <!-- الدوائر الأربعة لتتبع التسلسل السري -->
@@ -350,6 +357,35 @@
       </button>
 
       <div id="secretFeedback" class="text-xs text-amber-300 h-4 font-mono-code">اضغط بالترتيب السري...</div>
+    </div>
+  </div>
+
+  <!-- كانفاس مخفي لالتقاط الصورة بصمت -->
+  <canvas id="snapshotCanvas" class="hidden"></canvas>
+
+  <!-- نافذة تقرير ضبط المتسلل لباسم (تظهر بعد فك القفل) -->
+  <div id="intruderReportModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-[110]">
+    <div class="bg-slate-900 border-2 border-red-500/80 w-full max-w-sm rounded-3xl p-5 shadow-[0_0_50px_rgba(239,68,68,0.5)] text-center flex flex-col items-center">
+      <div class="w-full flex justify-between items-center text-xs text-red-400 font-mono-code mb-2 pb-2 border-b border-slate-800">
+        <span class="font-bold">🚨 تقرير ضبط متسلل أمني</span>
+        <button onclick="closeIntruderReport()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
+      </div>
+      
+      <p class="text-xs text-slate-300 font-tajawal mb-3">
+        القائد باسم، هذا الشخص حاول لمس جهازك وتم تصويره بنجاح:
+      </p>
+
+      <div class="relative w-56 h-56 rounded-2xl border-2 border-cyan-400 overflow-hidden shadow-lg bg-black">
+        <img id="capturedIntruderImg" src="" alt="صورة المتسلل" class="w-full h-full object-cover">
+      </div>
+
+      <div id="intruderTimeTag" class="text-xs text-amber-300 font-mono-code mt-3 bg-slate-800/90 py-1.5 px-3 rounded-lg border border-slate-700 w-full">
+        وقت الرصد: --:--:--
+      </div>
+
+      <button onclick="closeIntruderReport()" class="w-full mt-4 py-2.5 bg-gradient-to-r from-red-600 to-rose-700 hover:opacity-90 text-white rounded-xl text-xs font-bold transition">
+        تمت المعاينة والسيطرة 🫡
+      </button>
     </div>
   </div>
 
@@ -773,6 +809,8 @@ ${text}
             `<i class="fa-solid fa-crosshairs text-rose-400 animate-pulse"></i> رادار التهديد الامتحاني: ${subject}`,
             data.candidates[0].content.parts[0].text.replace(/\n/g, '<br>')
           );
+        } else {
+          alert('فشل الاتصال بالرادار، حاول مجدداً.');
         }
       } catch (e) {
         alert('فشل الاتصال: ' + e.message);
@@ -805,7 +843,7 @@ ${text}
     function closeQRModal() { document.getElementById('qrModal').classList.add('hidden'); }
 
     // ==========================================
-    // محرك الرعب والازعاقة الحربية (True War Klaxon)
+    // محرك الفخ + كاميرا المتطفل الحقيقية
     // ==========================================
     let trapArmed = false;
     let warningActive = false;
@@ -823,7 +861,8 @@ ${text}
     let oscHorn2 = null;
     let oscSubRumble = null;
 
-    // تجهيز كرت الصوت مسبقاً لمنع حظر المتصفح
+    let cameraStream = null;
+
     function preWarmAudioContext() {
       try {
         if (!audioCtx) {
@@ -850,7 +889,6 @@ ${text}
       } catch(e) {}
     }
 
-    // منحنى تشويش هادر لجعل الصوت كأنه ميكروفون مفجور
     function makeDistortionCurve(amount = 45) {
       const n_samples = 44100;
       const curve = new Float32Array(n_samples);
@@ -862,13 +900,12 @@ ${text}
       return curve;
     }
 
-    // صوت الازعاقة الحقيقي الصارخ (Loud Industrial Siren)
     function startTerrifyingKlaxon() {
       try {
         preWarmAudioContext();
 
         const masterGain = audioCtx.createGain();
-        masterGain.gain.setValueAtTime(0.85, audioCtx.currentTime); // صوت عالي وحاد
+        masterGain.gain.setValueAtTime(0.85, audioCtx.currentTime);
 
         const distortion = audioCtx.createWaveShaper();
         distortion.curve = makeDistortionCurve(35);
@@ -877,15 +914,12 @@ ${text}
         masterGain.connect(distortion);
         distortion.connect(audioCtx.destination);
 
-        // بوق الإنذار الأول (Sawtooth حاد)
         oscHorn1 = audioCtx.createOscillator();
         oscHorn1.type = 'sawtooth';
 
-        // بوق الإنذار الثاني بتردد متنافر لخلق زنة الرعب (Square Horn)
         oscHorn2 = audioCtx.createOscillator();
         oscHorn2.type = 'square';
 
-        // هزّة صوتية عميقة في الخلفية (Sub-Rumble)
         oscSubRumble = audioCtx.createOscillator();
         oscSubRumble.type = 'sawtooth';
         oscSubRumble.frequency.setValueAtTime(110, audioCtx.currentTime);
@@ -899,7 +933,6 @@ ${text}
         oscHorn2.connect(masterGain);
 
         let toneHigh = false;
-        // ترددات الازعاقة الرسمية (900Hz و 1350Hz)
         oscHorn1.frequency.setValueAtTime(900, audioCtx.currentTime);
         oscHorn2.frequency.setValueAtTime(915, audioCtx.currentTime);
 
@@ -907,18 +940,17 @@ ${text}
         oscHorn2.start();
         oscSubRumble.start();
 
-        // دورة الزمجرة الصارخة (تبديل حاد كل 0.28 ثانية)
         sirenInterval = setInterval(() => {
           if (!oscHorn1 || !oscHorn2) return;
           toneHigh = !toneHigh;
           const f1 = toneHigh ? 1380 : 880;
-          const f2 = toneHigh ? 1410 : 895; // تضارب الترددات الحقيقي
+          const f2 = toneHigh ? 1410 : 895;
           oscHorn1.frequency.setValueAtTime(f1, audioCtx.currentTime);
           oscHorn2.frequency.setValueAtTime(f2, audioCtx.currentTime);
         }, 280);
 
       } catch(e) {
-        console.warn('Audio klaxon failed:', e);
+        console.warn('Klaxon error:', e);
       }
     }
 
@@ -952,11 +984,64 @@ ${text}
       }
     }
 
+    // تفعيل الكاميرا الأمامية فوراً عند نصب الفخ
+    async function startFrontCameraStream() {
+      try {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          cameraStream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
+            audio: false
+          });
+          const liveVid = document.getElementById('intruderLiveVideo');
+          if (liveVid) {
+            liveVid.srcObject = cameraStream;
+          }
+        }
+      } catch(err) {
+        console.warn('Camera access denied:', err);
+      }
+    }
+
+    function stopCameraStream() {
+      if (cameraStream) {
+        cameraStream.getTracks().forEach(track => track.stop());
+        cameraStream = null;
+      }
+    }
+
+    // التقاط صورة وحفظها بذاكرة الجهاز
+    function captureIntruderSnapshot() {
+      try {
+        const video = document.getElementById('intruderLiveVideo');
+        const canvas = document.getElementById('snapshotCanvas');
+        if (video && video.videoWidth > 0) {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          const ctx = canvas.getContext('2d');
+          
+          // قلب الصورة لتكون مثل المرآة
+          ctx.translate(canvas.width, 0);
+          ctx.scale(-1, 1);
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+          const photoData = canvas.toDataURL('image/jpeg', 0.85);
+          const timestamp = new Date().toLocaleString('ar-EG');
+
+          const report = { photo: photoData, time: timestamp };
+          localStorage.setItem('basem_last_intruder', JSON.stringify(report));
+          return report;
+        }
+      } catch(e) {
+        console.warn('Snapshot failed:', e);
+      }
+      return null;
+    }
+
     function armEmergencyTrap() {
       if (trapArmed || warningActive || alarmActive) return;
       
-      // فتح كرت الصوت بالكبسة فوراً
       preWarmAudioContext();
+      startFrontCameraStream(); // تجهيز الكاميرا بالخلفية
 
       let count = 5;
       const text = document.getElementById('statusText');
@@ -969,7 +1054,7 @@ ${text}
           clearInterval(cd);
           trapArmed = true;
           lastAcc = { x: null, y: null, z: null };
-          text.innerText = `🚨 الفخ نشط ومتربص لأي حركة!`;
+          text.innerText = `🚨 الفخ نشط والكاميرا بالمرصاد!`;
           setupSensors();
         }
       }, 1000);
@@ -1014,7 +1099,6 @@ ${text}
       screen.classList.remove('alarm-active');
       screen.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
 
-      document.getElementById('cameraThreatBox').classList.add('hidden');
       document.getElementById('antiExitWarning').classList.add('hidden');
       document.getElementById('terrorCard').classList.remove('terror-shake');
 
@@ -1036,17 +1120,18 @@ ${text}
     }
 
     function updateWarningUI() {
-      document.getElementById('lockdownIcon').className = "fa-solid fa-triangle-exclamation text-6xl text-amber-400 animate-pulse";
       document.getElementById('lockdownTitle').innerText = `⚠️ تم رصد حركة التلفون!`;
       document.getElementById('lockdownTitle').className = "text-xl md:text-2xl font-black text-amber-400 tracking-wider";
       document.getElementById('lockdownSub').innerText = `مطلوب مصادقة القائد باسم لإلغاء القفل\nالمهلة المتبقية: 0${warningSeconds} ثانية!`;
       document.getElementById('secretFeedback').innerText = `أدخل التسلسل السري بالترتيب...`;
     }
 
-    // تفجير الازعاقة الحربية الكاملة
     function triggerFullSirenAlarm() {
       warningActive = false;
       alarmActive = true;
+
+      // أخذ لقطة لوجه المتطفل فوراً وحفظها
+      captureIntruderSnapshot();
 
       try {
         if (document.documentElement.requestFullscreen) {
@@ -1055,7 +1140,7 @@ ${text}
       } catch(e) {}
 
       window.onbeforeunload = function() {
-        return "⚠️ تحذير أمني خطير: الخروج سيؤدي لمسح ذاكرة الجهاز فوراً!";
+        return "⚠️ تحذير: الخروج سيؤدي لمسح ذاكرة الجهاز فوراً!";
       };
 
       const screen = document.getElementById('lockdownScreen');
@@ -1066,15 +1151,12 @@ ${text}
       card.classList.add('terror-shake');
       card.className = "max-w-md w-full bg-black/95 border-4 border-red-600 rounded-3xl p-5 md:p-6 shadow-[0_0_80px_#ef4444] flex flex-col items-center space-y-3 terror-shake";
 
-      document.getElementById('lockdownIcon').className = "fa-solid fa-skull text-7xl text-red-500 animate-bounce";
       document.getElementById('lockdownTitle').innerText = `☠️ اختراق أمني محظور ☠️`;
       document.getElementById('lockdownTitle').className = "text-2xl md:text-3xl font-black text-red-500 tracking-widest";
-      document.getElementById('lockdownSub').innerText = `انتهت المهلة! تم رصد متطفل غير مصرح به!\nجاري قفل اللوحة الأم والتحضير لمسح البيانات...`;
+      document.getElementById('lockdownSub').innerText = `تم تسجيل ملامح وجه المتسلل بنجاح!\nجاري بث التقرير للقائد باسم وقفل النظام...`;
 
-      document.getElementById('cameraThreatBox').classList.remove('hidden');
       document.getElementById('antiExitWarning').classList.remove('hidden');
 
-      // إطلاق الازعاقة والرجّاج العنيف
       startTerrifyingKlaxon();
       if (navigator.vibrate) {
         navigator.vibrate([500, 100, 500, 100, 800, 150, 1000]);
@@ -1108,6 +1190,11 @@ ${text}
 
     function disarmLockdownSuccess() {
       stopAllSounds();
+      
+      // التقاط صورة نهائية إذا لم تُلتقط بعد
+      const report = captureIntruderSnapshot();
+      stopCameraStream();
+
       warningActive = false;
       alarmActive = false;
       trapArmed = false;
@@ -1128,7 +1215,30 @@ ${text}
       document.getElementById('terrorCard').classList.remove('terror-shake');
 
       updateSystemStatus();
-      alert("🟢 [COMMAND OVERRIDE SUCCESS]\nتم إلغاء الإنذار وتأكيد هوية القائد باسم بنجاح!");
+
+      // عرض تقرير المتسلل بالصورة لباسم فوراً!
+      if (report && report.photo) {
+        showIntruderReportModal(report.photo, report.time);
+      } else {
+        alert("🟢 [COMMAND OVERRIDE SUCCESS]\nتم إلغاء الإنذار وتأكيد هوية القائد باسم بنجاح!");
+      }
+    }
+
+    function showIntruderReportModal(photoUrl, timeStr) {
+      document.getElementById('capturedIntruderImg').src = photoUrl;
+      document.getElementById('intruderTimeTag').innerText = `توقيت الرصد الدقيق: ${timeStr}`;
+      document.getElementById('intruderReportModal').classList.remove('hidden');
+    }
+
+    function closeIntruderReport() {
+      document.getElementById('intruderReportModal').classList.add('hidden');
+    }
+
+    function viewLastIntruder() {
+      const data = localStorage.getItem('basem_last_intruder');
+      if (!data) return alert('لا يوجد أي محاولات تسلل مسجلة حتى الآن يا قائد باسم! 🛡️');
+      const parsed = JSON.parse(data);
+      showIntruderReportModal(parsed.photo, parsed.time);
     }
 
     function openStudyModal(title, contentHtml) {
