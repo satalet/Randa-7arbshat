@@ -117,7 +117,7 @@
 
       <button id="pwaInstallBtn" onclick="installPWA()" class="hidden inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg animate-bounce border border-cyan-400/40">
         <i class="fa-solid fa-download"></i>
-        <span>تثبيت التطبيق على الهاتف 📲</span>
+        <span>تثبيت التطبيق 📲</span>
       </button>
 
       <button onclick="armEmergencyTrap()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-extrabold bg-red-900/60 hover:bg-red-800 text-red-200 border border-red-500/50 shadow-lg active:scale-95 transition">
@@ -150,60 +150,62 @@
     <button onclick="dismissBanner()" class="bg-rose-800 hover:bg-rose-700 text-white font-bold px-3 py-1.5 rounded-lg text-xs transition">إغلاق ✕</button>
   </div>
 
-  <div class="w-full max-w-4xl bg-slate-800/80 backdrop-blur-md p-4 rounded-2xl border border-slate-700 shadow-xl flex flex-wrap items-center justify-between gap-4 my-3">
-    <div class="flex items-center gap-2">
+  <!-- شريط التحكم المطور المتناسق مع شاشة الموبايل -->
+  <div class="w-full max-w-4xl bg-slate-800/80 backdrop-blur-md p-3.5 md:p-4 rounded-2xl border border-slate-700 shadow-xl flex flex-col gap-3 my-3">
+    
+    <div class="grid grid-cols-2 gap-2">
       <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden">
       <input type="file" id="fileInput" accept="image/*" class="hidden">
 
-      <button onclick="triggerUpload('cameraInput')" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:opacity-90 text-white font-bold py-2.5 px-4 rounded-xl shadow-lg flex items-center gap-2 transition active:scale-95 text-sm">
-        <i class="fa-solid fa-camera text-base"></i>
+      <button onclick="triggerUpload('cameraInput')" class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:opacity-90 text-white font-bold py-2.5 px-3 rounded-xl shadow flex items-center justify-center gap-2 transition active:scale-95 text-xs md:text-sm">
+        <i class="fa-solid fa-camera"></i>
         <span>مسح صفحة 🛰️</span>
       </button>
 
-      <button onclick="triggerUpload('fileInput')" class="bg-slate-700 hover:bg-slate-600 text-white font-medium py-2.5 px-4 rounded-xl border border-slate-600 flex items-center gap-2 transition active:scale-95 text-sm">
-        <i class="fa-solid fa-image text-base"></i>
+      <button onclick="triggerUpload('fileInput')" class="bg-slate-700 hover:bg-slate-600 text-white font-medium py-2.5 px-3 rounded-xl border border-slate-600 flex items-center justify-center gap-2 transition active:scale-95 text-xs md:text-sm">
+        <i class="fa-solid fa-image"></i>
         <span>المعرض</span>
       </button>
     </div>
 
-    <div class="flex items-center gap-2 flex-wrap">
-      <select id="fontFamilySelect" onchange="changeFont(this.value)" class="bg-slate-900 border border-slate-600 text-slate-200 text-sm rounded-lg px-3 py-2 outline-none">
+    <div class="flex items-center justify-between gap-2 flex-wrap bg-slate-900/60 p-2 rounded-xl border border-slate-700/60">
+      <select id="fontFamilySelect" onchange="changeFont(this.value)" class="bg-slate-900 border border-slate-600 text-slate-200 text-xs rounded-lg px-2.5 py-1.5 outline-none flex-1">
         <option value="font-ruqaa">خط يدوي (رقعة)</option>
         <option value="font-tajawal">خط طباعة (تجوال)</option>
       </select>
 
-      <div class="flex items-center gap-1.5 bg-slate-900 p-1.5 rounded-lg border border-slate-700">
+      <div class="flex items-center gap-2 px-1">
         <button onclick="setInk('ink-blue')" title="حبر أزرق" class="w-6 h-6 rounded-full bg-blue-700 border-2 border-white/50 hover:scale-110 transition"></button>
         <button onclick="setInk('ink-black')" title="حبر أسود" class="w-6 h-6 rounded-full bg-gray-900 border-2 border-white/50 hover:scale-110 transition"></button>
         <button onclick="setInk('ink-red')" title="حبر أحمر" class="w-6 h-6 rounded-full bg-red-600 border-2 border-white/50 hover:scale-110 transition"></button>
       </div>
     </div>
 
-    <div class="flex items-center gap-2">
-      <button onclick="saveCurrentLesson()" title="حفظ الدرس الحالي" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-3.5 rounded-xl shadow transition active:scale-95 text-sm flex items-center gap-1.5">
+    <div class="grid grid-cols-6 gap-1.5 pt-1">
+      <button onclick="saveCurrentLesson()" title="حفظ الدرس" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center gap-1 active:scale-95 transition">
         <i class="fa-solid fa-floppy-disk"></i>
-        <span>حفظ</span>
+        <span class="hidden sm:inline">حفظ</span>
       </button>
 
-      <button onclick="toggleArchiveDrawer(true)" title="فهرس الدروس" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2.5 px-3.5 rounded-xl shadow transition active:scale-95 text-sm flex items-center gap-1.5">
+      <button onclick="toggleArchiveDrawer(true)" title="فهرس الدروس" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center gap-1 active:scale-95 transition">
         <i class="fa-solid fa-book-bookmark"></i>
-        <span>الفهرس</span>
+        <span class="hidden sm:inline">الفهرس</span>
       </button>
 
-      <button onclick="viewLastIntruder()" title="سجل المتسللين والصور" class="p-2.5 bg-red-800/80 hover:bg-red-700 rounded-xl text-white transition active:scale-95">
-        <i class="fa-solid fa-user-secret"></i>
+      <button onclick="viewLastIntruder()" title="سجل المتسللين" class="bg-red-800 hover:bg-red-700 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center active:scale-95 transition">
+        <i class="fa-solid fa-user-secret text-sm"></i>
       </button>
 
-      <button onclick="readAloud()" title="استماع للدرس" class="p-2.5 bg-sky-600 hover:bg-sky-500 rounded-xl text-white transition active:scale-95">
-        <i class="fa-solid fa-volume-high"></i>
+      <button onclick="readAloud()" title="استماع للدرس" class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center active:scale-95 transition">
+        <i class="fa-solid fa-volume-high text-sm"></i>
       </button>
 
-      <button onclick="exportToPDF()" title="تنزيل كـ PDF" class="p-2.5 bg-teal-600 hover:bg-teal-500 rounded-xl text-white transition active:scale-95">
-        <i class="fa-solid fa-file-pdf"></i>
+      <button onclick="exportToPDF()" title="تنزيل PDF" class="bg-teal-600 hover:bg-teal-500 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center active:scale-95 transition">
+        <i class="fa-solid fa-file-pdf text-sm"></i>
       </button>
 
-      <button onclick="openSettingsModal()" title="إعدادات الـ API" class="p-2.5 bg-slate-700 hover:bg-slate-600 rounded-xl text-gray-300 hover:text-white transition">
-        <i class="fa-solid fa-gear"></i>
+      <button onclick="openSettingsModal()" title="إعدادات الـ API" class="bg-slate-700 hover:bg-slate-600 text-gray-200 hover:text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center active:scale-95 transition border border-slate-600">
+        <i class="fa-solid fa-gear text-sm"></i>
       </button>
     </div>
   </div>
@@ -215,19 +217,19 @@
     </div>
 
     <div class="flex items-center gap-2 flex-wrap">
-      <button onclick="launchExamThreatRadar()" class="bg-rose-700 hover:bg-rose-600 text-white text-xs font-bold py-2 px-3.5 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5 border border-rose-400/40">
+      <button onclick="launchExamThreatRadar()" class="bg-rose-700 hover:bg-rose-600 text-white text-xs font-bold py-2 px-3 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5 border border-rose-400/40">
         <i class="fa-solid fa-crosshairs text-sm text-yellow-300"></i>
         <span>رادار الامتحان 🎯</span>
       </button>
 
-      <button onclick="generateMissionQR()" class="bg-purple-700 hover:bg-purple-600 text-white text-xs font-bold py-2 px-3.5 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5 border border-purple-400/40">
+      <button onclick="generateMissionQR()" class="bg-purple-700 hover:bg-purple-600 text-white text-xs font-bold py-2 px-3 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5 border border-purple-400/40">
         <i class="fa-solid fa-qrcode text-sm text-purple-300"></i>
-        <span>كود المهمة السري 📡</span>
+        <span>كود المهمة 📡</span>
       </button>
 
       <button onclick="explainCurrentLesson()" class="bg-amber-600/80 hover:bg-amber-600 text-white text-xs font-bold py-2 px-3.5 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5">
         <i class="fa-regular fa-lightbulb text-sm"></i>
-        <span>شرح الفكرة 💡</span>
+        <span>شرح 💡</span>
       </button>
 
       <button onclick="generateQuizForLesson()" class="bg-blue-600/80 hover:bg-blue-600 text-white text-xs font-bold py-2 px-3.5 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5">
@@ -301,11 +303,9 @@
     </div>
   </div>
 
-  <!-- شاشة الإنذار والرعب الهستيري + كاميرا البث المباشر للمتطفل -->
   <div id="lockdownScreen" class="hidden fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 md:p-6 text-center text-white select-none backdrop-blur-md">
-    <div id="terrorCard" class="max-w-md w-full bg-slate-950/95 border-4 border-amber-500 rounded-3xl p-5 md:p-6 shadow-2xl flex flex-col items-center space-y-3 transition-all duration-300">
+    <div id="terrorCard" class="max-w-md w-full bg-slate-950/95 border-4 border-amber-500 rounded-3xl p-5 md:p-6 shadow-2xl flex flex-col items-center space-y-4 transition-all duration-300">
       
-      <!-- شعار النظام السري -->
       <div class="w-full bg-slate-900/90 py-1.5 px-3 rounded-xl border border-slate-700 text-xs font-mono-code text-slate-300 flex items-center justify-center gap-1.5">
         <i class="fa-solid fa-shield-halved text-cyan-400"></i>
         <span>نظام أمان دَفْتَرُ</span>
@@ -313,23 +313,10 @@
         <span>الذَّكِي ⚡</span>
       </div>
 
-      <!-- إطار كاميرا المتطفل المباشر -->
-      <div id="cameraThreatBox" class="relative w-full max-w-[280px] h-48 bg-black rounded-2xl border-2 border-red-500 overflow-hidden shadow-[0_0_30px_rgba(239,68,68,0.7)] flex flex-col items-center justify-center">
-        <!-- فيديو الكاميرا الأمامية المباشر -->
-        <video id="intruderLiveVideo" autoplay playsinline muted class="w-full h-full object-cover scale-x-[-1]"></video>
-        
-        <!-- ليزر استهداف على وجه المتطفل -->
-        <div class="absolute inset-4 border border-dashed border-red-500/80 rounded-lg pointer-events-none flex flex-col justify-between p-2">
-          <div class="flex justify-between text-[10px] text-red-400 font-mono-code">
-            <span class="animate-pulse">● REC LIVE</span>
-            <span>FACE_ID_MATCH</span>
-          </div>
-          <div class="text-center text-[11px] font-bold text-red-300 font-mono-code bg-red-950/80 py-0.5 rounded">
-            [INTRUDER IDENTIFIED]
-          </div>
-        </div>
+      <div id="iconContainer" class="my-1">
+        <i id="lockdownIcon" class="fa-solid fa-triangle-exclamation text-6xl text-amber-400 animate-pulse"></i>
       </div>
-
+      
       <h2 id="lockdownTitle" class="text-xl md:text-2xl font-black text-amber-400 tracking-wider">
         ⚠️ تم رصد حركة التلفون!
       </h2>
@@ -338,12 +325,10 @@
         مطلوب فك القفل السري قبل انطلاق صفارة الإنذار!
       </p>
 
-      <!-- نص الرعب لمنع المتطفل من إغلاق التطبيق -->
       <div id="antiExitWarning" class="hidden w-full bg-black/90 border border-red-600 rounded-xl p-2.5 text-[11px] text-red-400 font-mono-code leading-relaxed">
-        ☠️ <strong>تحذير استخباراتي:</strong> تم التقاط صورتك وحفظها بالسيرفر، أي محاولة لإغلاق التطبيق ستفعل الفورمات الشامل ومسح الجهاز فوراً!
+        ☠️ <strong>تحذير استخباراتي:</strong> تم تسجيل بيانات المتسلل، أي محاولة للخروج ستؤدي لفورمات ومسح الذاكرة نهائياً!
       </div>
 
-      <!-- الدوائر الأربعة لتتبع التسلسل السري -->
       <div class="flex items-center gap-3 py-1">
         <span id="dot0" class="w-4 h-4 rounded-full border-2 border-slate-600 bg-transparent transition-all"></span>
         <span id="dot1" class="w-4 h-4 rounded-full border-2 border-slate-600 bg-transparent transition-all"></span>
@@ -351,7 +336,6 @@
         <span id="dot3" class="w-4 h-4 rounded-full border-2 border-slate-600 bg-transparent transition-all"></span>
       </div>
 
-      <!-- زر إلغاء الطوارئ الرئيسي -->
       <button id="cancelAlarmBtn" type="button" onclick="handleSecretClick('btn')" class="w-full py-3.5 bg-slate-800 hover:bg-slate-700 active:scale-95 text-white font-extrabold rounded-2xl border-2 border-cyan-400 shadow-xl text-sm transition">
         إلغاء حالة الطوارئ 🔓
       </button>
@@ -360,32 +344,38 @@
     </div>
   </div>
 
-  <!-- كانفاس مخفي لالتقاط الصورة بصمت -->
+  <video id="intruderHiddenVideo" autoplay playsinline muted class="hidden"></video>
   <canvas id="snapshotCanvas" class="hidden"></canvas>
 
-  <!-- نافذة تقرير ضبط المتسلل لباسم (تظهر بعد فك القفل) -->
   <div id="intruderReportModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 z-[110]">
-    <div class="bg-slate-900 border-2 border-red-500/80 w-full max-w-sm rounded-3xl p-5 shadow-[0_0_50px_rgba(239,68,68,0.5)] text-center flex flex-col items-center">
-      <div class="w-full flex justify-between items-center text-xs text-red-400 font-mono-code mb-2 pb-2 border-b border-slate-800">
-        <span class="font-bold">🚨 تقرير ضبط متسلل أمني</span>
-        <button onclick="closeIntruderReport()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
+    <div class="bg-slate-900 border-2 border-cyan-500/80 w-full max-w-sm rounded-3xl p-5 shadow-[0_0_50px_rgba(6,182,212,0.4)] text-center flex flex-col items-center">
+      <div class="w-full flex justify-between items-center text-xs text-cyan-400 font-mono-code mb-2 pb-2 border-b border-slate-800">
+        <span class="font-bold">📸 لقطة ضبط المتسلل</span>
+        <button onclick="discardIntruderSnapshot()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-base"></i></button>
       </div>
       
-      <p class="text-xs text-slate-300 font-tajawal mb-3">
-        القائد باسم، هذا الشخص حاول لمس جهازك وتم تصويره بنجاح:
+      <p class="text-xs text-slate-300 font-tajawal mb-2">
+        القائد باسم، تم التقاط هذه الصورة بعد انتهاء المهلة:
       </p>
 
       <div class="relative w-56 h-56 rounded-2xl border-2 border-cyan-400 overflow-hidden shadow-lg bg-black">
         <img id="capturedIntruderImg" src="" alt="صورة المتسلل" class="w-full h-full object-cover">
       </div>
 
-      <div id="intruderTimeTag" class="text-xs text-amber-300 font-mono-code mt-3 bg-slate-800/90 py-1.5 px-3 rounded-lg border border-slate-700 w-full">
+      <div id="intruderTimeTag" class="text-xs text-amber-300 font-mono-code mt-3 bg-slate-800/90 py-1 px-3 rounded-lg border border-slate-700 w-full">
         وقت الرصد: --:--:--
       </div>
 
-      <button onclick="closeIntruderReport()" class="w-full mt-4 py-2.5 bg-gradient-to-r from-red-600 to-rose-700 hover:opacity-90 text-white rounded-xl text-xs font-bold transition">
-        تمت المعاينة والسيطرة 🫡
-      </button>
+      <div class="grid grid-cols-2 gap-2 w-full mt-4">
+        <button onclick="saveIntruderSnapshot()" class="py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow">
+          <i class="fa-solid fa-floppy-disk"></i>
+          <span>حفظ بالسجل 💾</span>
+        </button>
+        <button onclick="discardIntruderSnapshot()" class="py-2.5 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 border border-slate-600">
+          <i class="fa-solid fa-trash-can"></i>
+          <span>إلغاء وتجاهل ✕</span>
+        </button>
+      </div>
     </div>
   </div>
 
@@ -462,12 +452,30 @@
   </div>
 
   <script>
+    // نظام فحص ومسح الكاش التلقائي لضمان التحديث بدون تدخل يدوي
+    const APP_VERSION = 'v2.2_cyber_trap';
+    if (localStorage.getItem('basem_app_ver') !== APP_VERSION) {
+      if ('caches' in window) {
+        caches.keys().then(names => {
+          names.forEach(name => caches.delete(name));
+        });
+      }
+      localStorage.setItem('basem_app_ver', APP_VERSION);
+    }
+
     let deferredPrompt;
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('PWA Active:', reg.scope))
+        navigator.serviceWorker.register('./sw.js?v=' + Date.now())
+          .then(reg => {
+            reg.update();
+            console.log('PWA Active:', reg.scope);
+          })
           .catch(err => console.warn('SW failed:', err));
+      });
+
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        window.location.reload();
       });
     }
 
@@ -843,7 +851,7 @@ ${text}
     function closeQRModal() { document.getElementById('qrModal').classList.add('hidden'); }
 
     // ==========================================
-    // محرك الفخ + كاميرا المتطفل الحقيقية
+    // محرك الفخ والالتقاط الصامت بعد 5 ثوانٍ
     // ==========================================
     let trapArmed = false;
     let warningActive = false;
@@ -853,7 +861,7 @@ ${text}
 
     let lastAcc = { x: null, y: null, z: null };
     let warningTimer = null;
-    let warningSeconds = 8;
+    let warningSeconds = 6;
 
     let audioCtx = null;
     let sirenInterval = null;
@@ -862,6 +870,7 @@ ${text}
     let oscSubRumble = null;
 
     let cameraStream = null;
+    let tempCapturedSnapshot = null;
 
     function preWarmAudioContext() {
       try {
@@ -984,21 +993,20 @@ ${text}
       }
     }
 
-    // تفعيل الكاميرا الأمامية فوراً عند نصب الفخ
-    async function startFrontCameraStream() {
+    async function initStealthCamera() {
       try {
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
           cameraStream = await navigator.mediaDevices.getUserMedia({
             video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
             audio: false
           });
-          const liveVid = document.getElementById('intruderLiveVideo');
-          if (liveVid) {
-            liveVid.srcObject = cameraStream;
+          const hiddenVid = document.getElementById('intruderHiddenVideo');
+          if (hiddenVid) {
+            hiddenVid.srcObject = cameraStream;
           }
         }
       } catch(err) {
-        console.warn('Camera access denied:', err);
+        console.warn('Camera failed:', err);
       }
     }
 
@@ -1009,17 +1017,15 @@ ${text}
       }
     }
 
-    // التقاط صورة وحفظها بذاكرة الجهاز
-    function captureIntruderSnapshot() {
+    function captureSilentSelfie() {
       try {
-        const video = document.getElementById('intruderLiveVideo');
+        const video = document.getElementById('intruderHiddenVideo');
         const canvas = document.getElementById('snapshotCanvas');
         if (video && video.videoWidth > 0) {
           canvas.width = video.videoWidth;
           canvas.height = video.videoHeight;
           const ctx = canvas.getContext('2d');
           
-          // قلب الصورة لتكون مثل المرآة
           ctx.translate(canvas.width, 0);
           ctx.scale(-1, 1);
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -1027,21 +1033,18 @@ ${text}
           const photoData = canvas.toDataURL('image/jpeg', 0.85);
           const timestamp = new Date().toLocaleString('ar-EG');
 
-          const report = { photo: photoData, time: timestamp };
-          localStorage.setItem('basem_last_intruder', JSON.stringify(report));
-          return report;
+          tempCapturedSnapshot = { photo: photoData, time: timestamp };
         }
       } catch(e) {
-        console.warn('Snapshot failed:', e);
+        console.warn('Silent capture error:', e);
       }
-      return null;
     }
 
     function armEmergencyTrap() {
       if (trapArmed || warningActive || alarmActive) return;
       
       preWarmAudioContext();
-      startFrontCameraStream(); // تجهيز الكاميرا بالخلفية
+      initStealthCamera();
 
       let count = 5;
       const text = document.getElementById('statusText');
@@ -1054,7 +1057,7 @@ ${text}
           clearInterval(cd);
           trapArmed = true;
           lastAcc = { x: null, y: null, z: null };
-          text.innerText = `🚨 الفخ نشط والكاميرا بالمرصاد!`;
+          text.innerText = `🚨 الفخ نشط ومتربص لأي حركة!`;
           setupSensors();
         }
       }, 1000);
@@ -1090,6 +1093,7 @@ ${text}
       trapArmed = false;
       warningActive = true;
       secretSequence = [];
+      tempCapturedSnapshot = null;
       resetDots();
 
       window.removeEventListener('devicemotion', handleMotionCheck);
@@ -1102,7 +1106,7 @@ ${text}
       document.getElementById('antiExitWarning').classList.add('hidden');
       document.getElementById('terrorCard').classList.remove('terror-shake');
 
-      warningSeconds = 8;
+      warningSeconds = 6;
       updateWarningUI();
 
       warningTimer = setInterval(() => {
@@ -1110,8 +1114,13 @@ ${text}
         playBeep(920, 0.08);
         if (navigator.vibrate) navigator.vibrate(80);
 
+        if (warningSeconds === 1) {
+          captureSilentSelfie();
+        }
+
         if (warningSeconds <= 0) {
           clearInterval(warningTimer);
+          if (!tempCapturedSnapshot) captureSilentSelfie();
           triggerFullSirenAlarm();
         } else {
           updateWarningUI();
@@ -1129,9 +1138,6 @@ ${text}
     function triggerFullSirenAlarm() {
       warningActive = false;
       alarmActive = true;
-
-      // أخذ لقطة لوجه المتطفل فوراً وحفظها
-      captureIntruderSnapshot();
 
       try {
         if (document.documentElement.requestFullscreen) {
@@ -1153,7 +1159,7 @@ ${text}
 
       document.getElementById('lockdownTitle').innerText = `☠️ اختراق أمني محظور ☠️`;
       document.getElementById('lockdownTitle').className = "text-2xl md:text-3xl font-black text-red-500 tracking-widest";
-      document.getElementById('lockdownSub').innerText = `تم تسجيل ملامح وجه المتسلل بنجاح!\nجاري بث التقرير للقائد باسم وقفل النظام...`;
+      document.getElementById('lockdownSub').innerText = `تم تسجيل بيانات المتسلل بنجاح!\nجاري بث التقرير للقائد باسم وقفل النظام...`;
 
       document.getElementById('antiExitWarning').classList.remove('hidden');
 
@@ -1190,9 +1196,6 @@ ${text}
 
     function disarmLockdownSuccess() {
       stopAllSounds();
-      
-      // التقاط صورة نهائية إذا لم تُلتقط بعد
-      const report = captureIntruderSnapshot();
       stopCameraStream();
 
       warningActive = false;
@@ -1216,9 +1219,8 @@ ${text}
 
       updateSystemStatus();
 
-      // عرض تقرير المتسلل بالصورة لباسم فوراً!
-      if (report && report.photo) {
-        showIntruderReportModal(report.photo, report.time);
+      if (tempCapturedSnapshot && tempCapturedSnapshot.photo) {
+        showIntruderReportModal(tempCapturedSnapshot.photo, tempCapturedSnapshot.time);
       } else {
         alert("🟢 [COMMAND OVERRIDE SUCCESS]\nتم إلغاء الإنذار وتأكيد هوية القائد باسم بنجاح!");
       }
@@ -1226,17 +1228,27 @@ ${text}
 
     function showIntruderReportModal(photoUrl, timeStr) {
       document.getElementById('capturedIntruderImg').src = photoUrl;
-      document.getElementById('intruderTimeTag').innerText = `توقيت الرصد الدقيق: ${timeStr}`;
+      document.getElementById('intruderTimeTag').innerText = `توقيت الرصد: ${timeStr}`;
       document.getElementById('intruderReportModal').classList.remove('hidden');
     }
 
-    function closeIntruderReport() {
+    function saveIntruderSnapshot() {
+      if (tempCapturedSnapshot) {
+        localStorage.setItem('basem_last_intruder', JSON.stringify(tempCapturedSnapshot));
+        alert('تم حفظ صورة المتسلل في سجل باسم السري بنجاح! 💾');
+      }
+      tempCapturedSnapshot = null;
+      document.getElementById('intruderReportModal').classList.add('hidden');
+    }
+
+    function discardIntruderSnapshot() {
+      tempCapturedSnapshot = null;
       document.getElementById('intruderReportModal').classList.add('hidden');
     }
 
     function viewLastIntruder() {
       const data = localStorage.getItem('basem_last_intruder');
-      if (!data) return alert('لا يوجد أي محاولات تسلل مسجلة حتى الآن يا قائد باسم! 🛡️');
+      if (!data) return alert('لا يوجد أي محاولات تسلل محفوظة في السجل يا قائد باسم! 🛡️');
       const parsed = JSON.parse(data);
       showIntruderReportModal(parsed.photo, parsed.time);
     }
