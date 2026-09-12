@@ -1,41 +1,28 @@
-const CACHE_NAME = 'basem-notebook-v1';
-const ASSETS_TO_CACHE = [
-  './',
-  './index.html',
-  './manifest.json',
-  './assets/icons/icon-192.png',
-  './assets/icons/icon-512.png',
-  './assets/icons/icon-maskable-512.png',
-  './assets/icons/apple-touch-icon.png'
-];
+const CACHE_NAME = 'basem-notebook-v2';
 
+// إجبار التفعيل الفوري بدون انتظار إغلاق التطبيق
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE))
-  );
   self.skipWaiting();
 });
 
+// مسح كل ملفات الكاش القديمة فوراً
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
       return Promise.all(
         keys.map((key) => {
-          if (key !== CACHE_NAME) return caches.delete(key);
+          if (key !== CACHE_NAME) {
+            return caches.delete(key);
+          }
         })
       );
-    })
+    }).then(() => self.clients.claim())
   );
-  self.clients.claim();
 });
 
+// جلب الملفات المباشرة من النت أولاً (Network First) للتحديث دائماً
 self.addEventListener('fetch', (event) => {
-  if (event.request.url.includes('googleapis.com')) {
-    return;
-  }
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      return cachedResponse || fetch(event.request).catch(() => caches.match('./index.html'));
-    })
+    fetch(event.request).catch(() => caches.match(event.request))
   );
 });
