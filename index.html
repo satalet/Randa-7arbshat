@@ -31,19 +31,16 @@
       color: #f8fafc;
       overflow-x: hidden;
     }
-
     .basem-neon {
       text-shadow: 0 0 10px rgba(56, 189, 248, 0.7),
                    0 0 25px rgba(99, 102, 241, 0.7),
                    0 0 45px rgba(14, 165, 233, 0.9);
       animation: pulseGlow 3s infinite alternate;
     }
-
     @keyframes pulseGlow {
       0% { filter: drop-shadow(0 0 5px #38bdf8); }
       100% { filter: drop-shadow(0 0 20px #6366f1); }
     }
-
     .notebook-paper {
       background-color: #fcfbf7;
       background-image: repeating-linear-gradient(transparent, transparent 35px, #d8e2ed 35px, #d8e2ed 36px);
@@ -52,47 +49,37 @@
       border-radius: 12px;
       position: relative;
     }
-
     .notebook-paper::before {
       content: '';
       position: absolute;
-      top: 0;
-      bottom: 0;
-      right: 65px;
+      top: 0; bottom: 0; right: 65px;
       width: 2px;
       background-color: #38bdf8;
     }
-
     .notebook-content {
       padding-right: 80px;
       padding-left: 30px;
       outline: none;
       min-height: 520px;
     }
-
     .font-ruqaa { font-family: 'Aref Ruqaa', cursive; font-size: 1.25rem; }
     .font-tajawal { font-family: 'Tajawal', sans-serif; font-size: 1.15rem; }
     .font-mono-code { font-family: 'JetBrains Mono', monospace; }
     .ink-blue { color: #1e3a8a; }
     .ink-black { color: #1f2937; }
     .ink-red { color: #b91c1c; }
-
     @keyframes scanLaser {
       0% { top: 0%; opacity: 0.8; }
       50% { opacity: 1; }
       100% { top: 96%; opacity: 0.8; }
     }
     .hud-laser { animation: scanLaser 2s linear infinite alternate; }
-
     @keyframes terrorFlash {
       0%, 100% { background-color: #000000; }
       40% { background-color: #6a0000; }
       60% { background-color: #a80000; }
     }
-    .alarm-active {
-      animation: terrorFlash 0.25s infinite;
-    }
-
+    .alarm-active { animation: terrorFlash 0.25s infinite; }
     @keyframes terrorShake {
       0% { transform: translate(2px, 1px) rotate(0deg); }
       20% { transform: translate(-3px, -2px) rotate(-1deg); }
@@ -101,15 +88,7 @@
       80% { transform: translate(1px, -3px) rotate(-1deg); }
       100% { transform: translate(-2px, 2px) rotate(0deg); }
     }
-    .terror-shake {
-      animation: terrorShake 0.12s infinite;
-    }
-
-    /* أزرار النسخ الاحتياطي */
-    .backup-btn {
-      transition: all 0.2s;
-    }
-    .backup-btn:hover { transform: translateY(-1px); }
+    .terror-shake { animation: terrorShake 0.12s infinite; }
   </style>
 </head>
 <body class="p-3 md:p-8 flex flex-col items-center">
@@ -187,29 +166,24 @@
     </div>
 
     <div class="grid grid-cols-6 gap-1.5 pt-1">
-      <button onclick="saveCurrentLesson()" title="حفظ الدرس" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center gap-1 active:scale-95 transition">
+      <button onclick="saveCurrentLesson()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center gap-1 active:scale-95 transition">
         <i class="fa-solid fa-floppy-disk"></i>
         <span class="hidden sm:inline">حفظ</span>
       </button>
-
-      <button onclick="toggleArchiveDrawer(true)" title="فهرس الدروس" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center gap-1 active:scale-95 transition">
+      <button onclick="toggleArchiveDrawer(true)" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center gap-1 active:scale-95 transition">
         <i class="fa-solid fa-book-bookmark"></i>
         <span class="hidden sm:inline">الفهرس</span>
       </button>
-
-      <button onclick="viewLastIntruder()" title="سجل المتسللين" class="bg-red-800 hover:bg-red-700 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center active:scale-95 transition">
+      <button onclick="viewLastIntruder()" class="bg-red-800 hover:bg-red-700 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center active:scale-95 transition">
         <i class="fa-solid fa-user-secret text-sm"></i>
       </button>
-
-      <button onclick="readAloud()" title="استماع للدرس" class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center active:scale-95 transition">
+      <button onclick="readAloud()" class="bg-sky-600 hover:bg-sky-500 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center active:scale-95 transition">
         <i class="fa-solid fa-volume-high text-sm"></i>
       </button>
-
-      <button onclick="exportToPDF()" title="تنزيل PDF" class="bg-teal-600 hover:bg-teal-500 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center active:scale-95 transition">
+      <button onclick="exportToPDF()" class="bg-teal-600 hover:bg-teal-500 text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center active:scale-95 transition">
         <i class="fa-solid fa-file-pdf text-sm"></i>
       </button>
-
-      <button onclick="openSettingsModal()" title="إعدادات الـ API" class="bg-slate-700 hover:bg-slate-600 text-gray-200 hover:text-white font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center active:scale-95 transition border border-slate-600">
+      <button onclick="openSettingsModal()" class="bg-slate-700 hover:bg-slate-600 text-gray-200 font-bold py-2 rounded-xl shadow text-xs flex items-center justify-center active:scale-95 transition border border-slate-600">
         <i class="fa-solid fa-gear text-sm"></i>
       </button>
     </div>
@@ -220,28 +194,23 @@
       <i class="fa-solid fa-shield-halved text-base text-cyan-400"></i>
       <span>عمليات باسم التكتيكية:</span>
     </div>
-
     <div class="flex items-center gap-2 flex-wrap">
       <button onclick="launchExamThreatRadar()" class="bg-rose-700 hover:bg-rose-600 text-white text-xs font-bold py-2 px-3 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5 border border-rose-400/40">
         <i class="fa-solid fa-crosshairs text-sm text-yellow-300"></i>
         <span>رادار الامتحان 🎯</span>
       </button>
-
       <button onclick="generateMissionQR()" class="bg-purple-700 hover:bg-purple-600 text-white text-xs font-bold py-2 px-3 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5 border border-purple-400/40">
         <i class="fa-solid fa-qrcode text-sm text-purple-300"></i>
         <span>كود المهمة 📡</span>
       </button>
-
       <button onclick="explainCurrentLesson()" class="bg-amber-600/80 hover:bg-amber-600 text-white text-xs font-bold py-2 px-3.5 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5">
         <i class="fa-regular fa-lightbulb text-sm"></i>
         <span>شرح 💡</span>
       </button>
-
       <button onclick="generateQuizForLesson()" class="bg-blue-600/80 hover:bg-blue-600 text-white text-xs font-bold py-2 px-3.5 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5">
         <i class="fa-solid fa-circle-question text-sm"></i>
         <span>تحدي 📝</span>
       </button>
-
       <button onclick="shareWithBabaWhatsApp()" class="bg-emerald-600/80 hover:bg-emerald-600 text-white text-xs font-bold py-2 px-3.5 rounded-xl shadow transition active:scale-95 flex items-center gap-1.5">
         <i class="fa-brands fa-whatsapp text-sm"></i>
         <span>إرسال للوالد 💬</span>
@@ -277,7 +246,6 @@
       </div>
     </div>
   </div>
-
   <div id="cyberHudOverlay" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex flex-col items-center justify-center p-4">
     <div class="relative w-full max-w-lg h-96 border-2 border-cyan-500 rounded-3xl overflow-hidden bg-slate-950/80 shadow-[0_0_50px_rgba(6,182,212,0.5)] flex flex-col justify-between p-6 font-mono-code">
       <div class="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_15px_#22d3ee] hud-laser"></div>
@@ -428,13 +396,12 @@
         </button>
       </div>
 
-      <!-- أزرار النسخ الاحتياطي الجديدة -->
       <div class="grid grid-cols-2 gap-2 mb-4">
-        <button onclick="exportLessonsBackup()" class="backup-btn bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 border border-emerald-500/40">
+        <button onclick="exportLessonsBackup()" class="bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 border border-emerald-500/40 transition">
           <i class="fa-solid fa-cloud-arrow-down"></i>
           <span>تصدير نسخة 💾</span>
         </button>
-        <button onclick="document.getElementById('importBackupInput').click()" class="backup-btn bg-cyan-700 hover:bg-cyan-600 text-white text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 border border-cyan-500/40">
+        <button onclick="document.getElementById('importBackupInput').click()" class="bg-cyan-700 hover:bg-cyan-600 text-white text-xs font-bold py-2 px-3 rounded-xl flex items-center justify-center gap-1.5 border border-cyan-500/40 transition">
           <i class="fa-solid fa-cloud-arrow-up"></i>
           <span>استيراد نسخة 📥</span>
         </button>
@@ -457,4 +424,1037 @@
         <h3 class="text-lg font-bold text-cyan-400 flex items-center gap-2">
           <i class="fa-solid fa-key"></i> إعداد مفتاح الذكاء الاصطناعي
         </h3>
-       
+        <button onclick="closeSettingsModal()" class="text-gray-400 hover:text-white">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <p class="text-sm text-gray-300 mb-3">ادخل مفتاح Gemini API ليتم حفظه بجهاز باسم تلقائياً:</p>
+      <input type="password" id="apiKeyInput" placeholder="AIza..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white outline-none focus:border-cyan-500 mb-4 text-left font-mono text-sm">
+      <div class="flex justify-end gap-2">
+        <button onclick="closeSettingsModal()" class="px-4 py-2 bg-slate-700 rounded-xl text-gray-300 text-sm">إلغاء</button>
+        <button onclick="saveApiKey()" class="px-5 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 font-bold rounded-xl text-white text-sm">حفظ وتفعيل</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==========================================
+    // 🚀 دفتر باسم الذكي v2.3 - النسخة المُصلحة
+    // ==========================================
+
+    // ----- 1) نظام إدارة الكاش والإصدار -----
+    const APP_VERSION = 'v2.3_cyber_fixed';
+    if (localStorage.getItem('basem_app_ver') !== APP_VERSION) {
+      if ('caches' in window) {
+        caches.keys().then(names => {
+          names.forEach(name => caches.delete(name));
+        });
+      }
+      localStorage.setItem('basem_app_ver', APP_VERSION);
+    }
+
+    let deferredPrompt;
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => { reg.update(); console.log('PWA Active:', reg.scope); })
+          .catch(err => console.warn('SW failed:', err));
+      });
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      const installBtn = document.getElementById('pwaInstallBtn');
+      if (installBtn) installBtn.classList.remove('hidden');
+    });
+
+    async function installPWA() {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        document.getElementById('pwaInstallBtn').classList.add('hidden');
+      }
+      deferredPrompt = null;
+    }
+
+    // ----- 2) تشفير المفتاح (TextEncoder - إصلاح #7) -----
+    const SALT = "BasemSpecialSecret2026";
+
+    function obfuscate(str) {
+      try {
+        const bytes = new TextEncoder().encode(str);
+        const saltBytes = new TextEncoder().encode(SALT);
+        const xored = new Uint8Array(bytes.length);
+        for (let i = 0; i < bytes.length; i++) {
+          xored[i] = bytes[i] ^ saltBytes[i % saltBytes.length];
+        }
+        // تحويل آمن إلى Base64
+        let binary = '';
+        for (let i = 0; i < xored.length; i++) {
+          binary += String.fromCharCode(xored[i]);
+        }
+        return btoa(binary);
+      } catch (e) {
+        console.warn('Obfuscate error:', e);
+        return null;
+      }
+    }
+
+    function deobfuscate(str) {
+      try {
+        const binary = atob(str);
+        const xored = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) {
+          xored[i] = binary.charCodeAt(i);
+        }
+        const saltBytes = new TextEncoder().encode(SALT);
+        const bytes = new Uint8Array(xored.length);
+        for (let i = 0; i < xored.length; i++) {
+          bytes[i] = xored[i] ^ saltBytes[i % saltBytes.length];
+        }
+        return new TextDecoder().decode(bytes);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function getApiKey() {
+      const stored = localStorage.getItem('basem_gemini_key') || localStorage.getItem('randa_gemini_key');
+      return stored ? deobfuscate(stored) : null;
+    }
+
+    function saveApiKey() {
+      const val = document.getElementById('apiKeyInput').value.trim();
+      if (!val) return showDiagnostic('الرجاء إدخال المفتاح أولاً!');
+      const encoded = obfuscate(val);
+      if (!encoded) return showDiagnostic('فشل تشفير المفتاح، حاول مجدداً.');
+      localStorage.setItem('basem_gemini_key', encoded);
+      closeSettingsModal();
+      dismissBanner();
+      updateSystemStatus();
+      alert('تم حفظ وتفعيل المفتاح بنجاح يا بطل! ⚡');
+    }
+
+    // ----- 3) التحقق الحقيقي من صحة المفتاح (إصلاح #12) -----
+    async function verifyApiKey(apiKey) {
+      try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-goog-api-key': apiKey },
+          body: JSON.stringify({ contents: [{ parts: [{ text: 'ping' }] }] })
+        });
+        return res.ok;
+      } catch (e) {
+        return false;
+      }
+    }
+
+    // ----- 4) تحديث حالة النظام (مع Ping اختياري) -----
+    let lastVerifyTime = 0;
+
+    function updateSystemStatus(customState = null, customMsg = null) {
+      const badge = document.getElementById('statusBadge');
+      const dot = document.getElementById('statusDot');
+      const text = document.getElementById('statusText');
+
+      if (!navigator.onLine) {
+        badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold border border-rose-500/50 bg-rose-950/60 text-rose-300";
+        dot.className = "w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping";
+        text.innerText = "أوفلاين | وضع بدون إنترنت ⚠️";
+        return;
+      }
+
+      if (customState === 'processing') {
+        badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold border border-cyan-500/50 bg-cyan-950/60 text-cyan-300";
+        dot.className = "w-2.5 h-2.5 rounded-full bg-cyan-400 animate-spin";
+        text.innerText = customMsg || "جارٍ المعالجة الذكية... ⏳";
+        return;
+      }
+
+      const key = getApiKey();
+      if (!key) {
+        badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold border border-amber-500/50 bg-amber-950/60 text-amber-300";
+        dot.className = "w-2.5 h-2.5 rounded-full bg-amber-400";
+        text.innerText = "بانتظار المفتاح الذكي (اضغط الترس ⚙️)";
+        return;
+      }
+
+      // تحقق دوري من صحة المفتاح (مرة كل 5 دقائق)
+      const now = Date.now();
+      if (now - lastVerifyTime > 300000) {
+        lastVerifyTime = now;
+        verifyApiKey(key).then(ok => {
+          if (ok) {
+            badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold border border-emerald-500/40 bg-emerald-950/50 text-emerald-300";
+            dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
+            text.innerText = "أونلاين | النظام جاهز وسريع 🟢";
+          } else {
+            badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold border border-rose-500/50 bg-rose-950/60 text-rose-300";
+            dot.className = "w-2.5 h-2.5 rounded-full bg-rose-500";
+            text.innerText = "⚠️ المفتاح غير صالح، راجعه من الترس";
+          }
+        });
+      } else {
+        badge.className = "inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold border border-emerald-500/40 bg-emerald-950/50 text-emerald-300";
+        dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400";
+        text.innerText = "أونلاين | النظام جاهز 🟢";
+      }
+    }
+
+    window.addEventListener('online', () => { updateSystemStatus(); dismissBanner(); });
+    window.addEventListener('offline', () => updateSystemStatus());
+
+    function showDiagnostic(msg) {
+      document.getElementById('diagnosticText').innerText = msg;
+      document.getElementById('diagnosticBanner').classList.remove('hidden');
+    }
+    function dismissBanner() {
+      document.getElementById('diagnosticBanner').classList.add('hidden');
+    }
+
+    // ----- 5) التاريخ واليوم -----
+    const days = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+    const nowDate = new Date();
+    document.getElementById('dayInput').value = days[nowDate.getDay()];
+    document.getElementById('dateInput').value = nowDate.toLocaleDateString('ar-EG');
+
+    // ----- 6) الحبر والخط (مع الحفظ في localStorage - إصلاح #4) -----
+    let currentInk = localStorage.getItem('basem_ink') || 'ink-blue';
+    let currentFont = localStorage.getItem('basem_font') || 'font-ruqaa';
+
+    function changeFont(fontClass) {
+      currentFont = fontClass;
+      localStorage.setItem('basem_font', fontClass);
+      const b = document.getElementById('notebookBody');
+      b.classList.remove('font-ruqaa', 'font-tajawal');
+      b.classList.add(fontClass);
+    }
+
+    function setInk(inkClass) {
+      currentInk = inkClass;
+      localStorage.setItem('basem_ink', inkClass);
+      const b = document.getElementById('notebookBody');
+      b.classList.remove('ink-blue', 'ink-black', 'ink-red');
+      b.classList.add(inkClass);
+    }
+
+    // استرجاع القيم المحفوظة عند الإقلاع
+    document.addEventListener('DOMContentLoaded', () => {
+      const b = document.getElementById('notebookBody');
+      b.classList.remove('ink-blue', 'ink-black', 'ink-red');
+      b.classList.add(currentInk);
+      b.classList.remove('font-ruqaa', 'font-tajawal');
+      b.classList.add(currentFont);
+      document.getElementById('fontFamilySelect').value = currentFont;
+    });
+
+    // ----- 7) إدارة الدروس (مع try/catch - إصلاح #5) -----
+    function getStoredLessons() {
+      try {
+        const raw = localStorage.getItem('basem_notebook_lessons') || localStorage.getItem('randa_notebook_lessons') || '[]';
+        const parsed = JSON.parse(raw);
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) {
+        console.warn('Lessons parse error:', e);
+        return [];
+      }
+    }
+
+    function saveCurrentLesson() {
+      const subject = document.getElementById('subjectInput').value.trim() || 'درس بدون عنوان';
+      const day = document.getElementById('dayInput').value.trim();
+      const date = document.getElementById('dateInput').value.trim();
+      const content = document.getElementById('notebookBody').innerHTML;
+
+      const lessons = getStoredLessons();
+      lessons.unshift({
+        id: Date.now(),
+        subject, day, date, content,
+        ink: currentInk,
+        font: currentFont
+      });
+      localStorage.setItem('basem_notebook_lessons', JSON.stringify(lessons));
+      alert(`تم حفظ درس (${subject}) في الفهرس بنجاح يا باسم! ⚡`);
+    }
+
+    function toggleArchiveDrawer(open) {
+      const d = document.getElementById('archiveDrawer');
+      if (open) { renderArchiveList(); d.classList.remove('hidden'); }
+      else { d.classList.add('hidden'); }
+    }
+
+    function renderArchiveList() {
+      const container = document.getElementById('lessonsContainer');
+      const filter = document.getElementById('subjectFilter').value;
+      const lessons = getStoredLessons();
+
+      const subjectSelect = document.getElementById('subjectFilter');
+      const uniqueSubjects = [...new Set(lessons.map(l => l.subject))];
+      subjectSelect.innerHTML = `<option value="ALL">جميع المواد (${lessons.length})</option>` +
+        uniqueSubjects.map(s => `<option value="${s}" ${filter === s ? 'selected' : ''}>${s}</option>`).join('');
+
+      const filtered = filter === 'ALL' ? lessons : lessons.filter(l => l.subject === filter);
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="text-center text-slate-400 py-12"><i class="fa-solid fa-box-archive text-4xl mb-2 text-slate-600"></i><p>لا يوجد دروس محفوظة حتى الآن.</p></div>`;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => `
+        <div class="bg-slate-800/90 border border-slate-700 hover:border-cyan-500/50 rounded-xl p-3 transition flex flex-col justify-between gap-2 shadow-sm">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="text-xs bg-cyan-500/20 text-cyan-300 font-bold px-2 py-0.5 rounded-md">${item.subject}</span>
+              <div class="text-xs text-slate-400 mt-1">${item.day} - ${item.date}</div>
+            </div>
+            <button onclick="deleteLesson(${item.id})" class="text-slate-500 hover:text-red-400 p-1"><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+          <div class="text-slate-300 text-xs line-clamp-2 mt-1 border-t border-slate-700/60 pt-1.5 font-tajawal">
+            ${item.content.replace(/<[^>]*>?/gm, ' ')}
+          </div>
+          <button onclick="loadLesson(${item.id})" class="w-full mt-2 bg-blue-600/60 hover:bg-blue-600 text-white text-xs font-bold py-1.5 rounded-lg transition flex items-center justify-center gap-1">
+            <i class="fa-solid fa-book-open"></i><span>فتح بالدفتر</span>
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function loadLesson(id) {
+      const lesson = getStoredLessons().find(l => l.id === id);
+      if (!lesson) return;
+      document.getElementById('subjectInput').value = lesson.subject;
+      document.getElementById('dayInput').value = lesson.day;
+      document.getElementById('dateInput').value = lesson.date;
+      document.getElementById('notebookBody').innerHTML = lesson.content;
+      if (lesson.ink) setInk(lesson.ink);
+      if (lesson.font) {
+        document.getElementById('fontFamilySelect').value = lesson.font;
+        changeFont(lesson.font);
+      }
+      toggleArchiveDrawer(false);
+    }
+
+    function deleteLesson(id) {
+      if (!confirm('بدك تحذف هذا الدرس من الفهرس؟')) return;
+      const lessons = getStoredLessons().filter(l => l.id !== id);
+      localStorage.setItem('basem_notebook_lessons', JSON.stringify(lessons));
+      renderArchiveList();
+    }
+
+    // ----- 8) النسخ الاحتياطي (إصلاح #10) -----
+    function exportLessonsBackup() {
+      const lessons = getStoredLessons();
+      if (lessons.length === 0) return alert('لا يوجد دروس للتصدير!');
+      const blob = new Blob([JSON.stringify(lessons, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `basem_backup_${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    document.getElementById('importBackupInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        try {
+          const imported = JSON.parse(evt.target.result);
+          if (!Array.isArray(imported)) throw new Error('صيغة غير صحيحة');
+          const existing = getStoredLessons();
+          const merged = [...imported, ...existing];
+          localStorage.setItem('basem_notebook_lessons', JSON.stringify(merged));
+          alert(`تم استيراد ${imported.length} درس بنجاح! 📥`);
+          renderArchiveList();
+        } catch (err) {
+          alert('فشل الاستيراد: الملف غير صالح');
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    });
+
+    // ----- 9) رفع الصور (مع تصفير input - إصلاح #6) -----
+    function triggerUpload(inputId) {
+      if (!navigator.onLine) return showDiagnostic('لا يمكنك رفع الصور بدون إنترنت.');
+      if (!getApiKey()) {
+        openSettingsModal();
+        return showDiagnostic('يرجى حفظ مفتاح Gemini أولاً.');
+      }
+      const input = document.getElementById(inputId);
+      input.value = ''; // تصفير ليسمح برفع نفس الصورة
+      input.click();
+    }
+
+    document.getElementById('cameraInput').addEventListener('change', handleUpload);
+    document.getElementById('fileInput').addEventListener('change', handleUpload);
+
+    async function compressImageFile(file, maxDimension = 1200) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            let width = img.width;
+            let height = img.height;
+            if (width > maxDimension || height > maxDimension) {
+              if (width > height) {
+                height = Math.round((height * maxDimension) / width);
+                width = maxDimension;
+              } else {
+                width = Math.round((width * maxDimension) / height);
+                height = maxDimension;
+              }
+            }
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+            const dataUrl = canvas.toDataURL('image/jpeg', 0.80);
+            resolve(dataUrl.split(',')[1]);
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function handleUpload(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const apiKey = getApiKey();
+      const hud = document.getElementById('cyberHudOverlay');
+      hud.classList.remove('hidden');
+      updateSystemStatus('processing');
+      dismissBanner();
+
+      try {
+        const compressedBase64 = await compressImageFile(file);
+        await processHandwritingFast(compressedBase64, apiKey);
+      } catch (err) {
+        showDiagnostic('حدث خطأ أثناء معالجة ملف الصورة.');
+      } finally {
+        hud.classList.add('hidden');
+        updateSystemStatus();
+      }
+    }
+
+    // ----- 10) معالجة الكتابة اليدوية (Gemini 2.0 - إصلاح #1) -----
+    const GEMINI_MODEL = 'gemini-2.0-flash';
+    const GEMINI_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
+
+    async function callGemini(apiKey, prompt, imageBase64 = null) {
+      const parts = [{ text: prompt }];
+      if (imageBase64) {
+        parts.push({ inlineData: { mimeType: 'image/jpeg', data: imageBase64 } });
+      }
+      const res = await fetch(GEMINI_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-goog-api-key': apiKey },
+        body: JSON.stringify({ contents: [{ parts }] })
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error.message);
+      if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+        return data.candidates[0].content.parts[0].text;
+      }
+      throw new Error('لم يتم استلام رد من الذكاء الاصطناعي');
+    }
+
+    async function processHandwritingFast(base64Data, apiKey) {
+      const prompt = `أنت مساعد مدرسي ذكي لطالب اسمه باسم.
+استخرج النص العربي المكتوب بخط اليد من صورة الدفتر وصحح أي أخطاء إملائية بناءً على سياق الدرس المدرسي.
+رتّب المخرجات بشكل جميل ومنظم (عنوان، أسطر، تعداد نقطي) وأرجع النص الصافي المناسب للدفتر فقط بدون أي مقدمات منك.`;
+      try {
+        const raw = await callGemini(apiKey, prompt, base64Data);
+        document.getElementById('notebookBody').innerHTML = raw.replace(/\n/g, '<br>');
+      } catch (err) {
+        showDiagnostic(`فشل: ${err.message}`);
+      }
+    }
+
+    // ----- 11) رادار الامتحان -----
+    async function launchExamThreatRadar() {
+      const apiKey = getApiKey();
+      if (!apiKey) return openSettingsModal();
+      const text = document.getElementById('notebookBody').innerText.trim();
+      const subject = document.getElementById('subjectInput').value.trim();
+      if (!text || text.length < 5) return alert('الدفتر فاضي! صوّر أو اكتب درس أولاً.');
+
+      const status = document.getElementById('loadingStatus');
+      const msg = document.getElementById('loadingMessage');
+      status.classList.remove('hidden');
+      msg.innerText = '🎯 رادار الذكاء الاصطناعي يحلل الدرس...';
+
+      const prompt = `أنت رادار استخباراتي لتحليل أسئلة الامتحانات لطالب ذكي اسمه باسم.
+محتوى الدرس:
+"""
+${text}
+"""
+مهمتك:
+1. حلل الدرس واستخرج 3 أسئلة متوقعة بقوة.
+2. لكل سؤال حدد نسبة توقعه.
+3. صنّف بأيقونات:
+   🔴 [خطر أحمر]: سؤال وزاري حتمي مع حله.
+   🟡 [كمين امتحاني]: فكرة صعبة مع كشف الخدعة.
+   🟢 [سؤال مباشر مضمون]: مع إجابته.
+4. اكتب بأسلوب حماسي موجه للقائد باسم.`;
+
+      try {
+        const result = await callGemini(apiKey, prompt);
+        openStudyModal(
+          `<i class="fa-solid fa-crosshairs text-rose-400 animate-pulse"></i> رادار التهديد: ${subject}`,
+          result.replace(/\n/g, '<br>')
+        );
+      } catch (e) {
+        alert('فشل الرادار: ' + e.message);
+      } finally {
+        status.classList.add('hidden');
+      }
+    }
+
+    // ----- 12) QR (CorrectLevel.M - إصلاح #9) -----
+    function generateMissionQR() {
+      const text = document.getElementById('notebookBody').innerText.trim();
+      const subject = document.getElementById('subjectInput').value.trim();
+      if (!text || text.length < 5) return alert('اكتب أو امسح درساً أولاً!');
+
+      const qrContainer = document.getElementById('qrcodeContainer');
+      qrContainer.innerHTML = '';
+
+      const missionPayload = `[TOP SECRET - BASEM]\nSUBJECT: ${subject}\n---\n${text.substring(0, 250)}`;
+
+      try {
+        new QRCode(qrContainer, {
+          text: missionPayload,
+          width: 190,
+          height: 190,
+          colorDark: "#0f172a",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.M
+        });
+        document.getElementById('qrModal').classList.remove('hidden');
+      } catch (e) {
+        alert('النص طويل جداً للـ QR، جرّب درس أقصر.');
+      }
+    }
+    function closeQRModal() { document.getElementById('qrModal').classList.add('hidden'); }
+
+    // ==========================================
+    // 13) نظام الفخ الأمني (مع إصلاحات #2 #3 #13)
+    // ==========================================
+    let trapArmed = false;
+    let warningActive = false;
+    let alarmActive = false;
+    let secretSequence = [];
+    const TARGET_SEQUENCE = ['btn', 'btn', 'title_basem', 'btn'];
+
+    let lastAcc = { x: null, y: null, z: null };
+    let filteredAcc = { x: 0, y: 0, z: 0 }; // Low-pass filter
+    let warningTimer = null;
+    let warningSeconds = 6;
+
+    let audioCtx = null;
+    let sirenInterval = null;
+    let oscHorn1 = null, oscHorn2 = null, oscSubRumble = null;
+
+    let cameraStream = null;
+    let tempCapturedSnapshot = null;
+
+    function preWarmAudioContext() {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+      } catch(e) {}
+    }
+
+    function playBeep(freq = 800, duration = 0.1) {
+      try {
+        preWarmAudioContext();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
+    function makeDistortionCurve(amount = 45) {
+      const n = 44100;
+      const curve = new Float32Array(n);
+      const deg = Math.PI / 180;
+      for (let i = 0; i < n; ++i) {
+        const x = (i * 2) / n - 1;
+        curve[i] = ((3 + amount) * x * 20 * deg) / (Math.PI + amount * Math.abs(x));
+      }
+      return curve;
+    }
+
+    function startTerrifyingKlaxon() {
+      try {
+        preWarmAudioContext();
+        const masterGain = audioCtx.createGain();
+        masterGain.gain.setValueAtTime(0.85, audioCtx.currentTime);
+        const distortion = audioCtx.createWaveShaper();
+        distortion.curve = makeDistortionCurve(35);
+        distortion.oversample = '4x';
+        masterGain.connect(distortion);
+        distortion.connect(audioCtx.destination);
+
+        oscHorn1 = audioCtx.createOscillator();
+        oscHorn1.type = 'sawtooth';
+        oscHorn2 = audioCtx.createOscillator();
+        oscHorn2.type = 'square';
+        oscSubRumble = audioCtx.createOscillator();
+        oscSubRumble.type = 'sawtooth';
+        oscSubRumble.frequency.setValueAtTime(110, audioCtx.currentTime);
+
+        const subGain = audioCtx.createGain();
+        subGain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+        oscSubRumble.connect(subGain);
+        subGain.connect(audioCtx.destination);
+
+        oscHorn1.connect(masterGain);
+        oscHorn2.connect(masterGain);
+
+        let toneHigh = false;
+        oscHorn1.frequency.setValueAtTime(900, audioCtx.currentTime);
+        oscHorn2.frequency.setValueAtTime(915, audioCtx.currentTime);
+
+        oscHorn1.start();
+        oscHorn2.start();
+        oscSubRumble.start();
+
+        sirenInterval = setInterval(() => {
+          if (!oscHorn1 || !oscHorn2) return;
+          toneHigh = !toneHigh;
+          oscHorn1.frequency.setValueAtTime(toneHigh ? 1380 : 880, audioCtx.currentTime);
+          oscHorn2.frequency.setValueAtTime(toneHigh ? 1410 : 895, audioCtx.currentTime);
+        }, 280);
+      } catch(e) { console.warn('Klaxon error:', e); }
+    }
+
+    function stopAllSounds() {
+      if (sirenInterval) { clearInterval(sirenInterval); sirenInterval = null; }
+      if (warningTimer) { clearInterval(warningTimer); warningTimer = null; }
+      try {
+        if (oscHorn1) { oscHorn1.stop(); oscHorn1.disconnect(); oscHorn1 = null; }
+        if (oscHorn2) { oscHorn2.stop(); oscHorn2.disconnect(); oscHorn2 = null; }
+        if (oscSubRumble) { oscSubRumble.stop(); oscSubRumble.disconnect(); oscSubRumble = null; }
+      } catch(e) {}
+    }
+
+    function resetDots() {
+      for (let i = 0; i < 4; i++) {
+        const d = document.getElementById('dot' + i);
+        if (d) d.className = "w-4 h-4 rounded-full border-2 border-slate-600 bg-transparent transition-all";
+      }
+    }
+
+    function updateDots(count) {
+      for (let i = 0; i < 4; i++) {
+        const d = document.getElementById('dot' + i);
+        if (d) {
+          d.className = i < count
+            ? "w-4 h-4 rounded-full border-2 border-emerald-400 bg-emerald-400 shadow-[0_0_10px_#34d399] transition-all"
+            : "w-4 h-4 rounded-full border-2 border-slate-600 bg-transparent transition-all";
+        }
+      }
+    }
+
+    async function initStealthCamera() {
+      try {
+        if (navigator.mediaDevices?.getUserMedia) {
+          cameraStream = await navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 480 } },
+            audio: false
+          });
+          const hiddenVid = document.getElementById('intruderHiddenVideo');
+          if (hiddenVid) hiddenVid.srcObject = cameraStream;
+        }
+      } catch(err) { console.warn('Camera failed:', err); }
+    }
+
+    function stopCameraStream() {
+      if (cameraStream) {
+        cameraStream.getTracks().forEach(t => t.stop());
+        cameraStream = null;
+      }
+    }
+
+    function captureSilentSelfie() {
+      try {
+        const video = document.getElementById('intruderHiddenVideo');
+        const canvas = document.getElementById('snapshotCanvas');
+        if (video && video.videoWidth > 0) {
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          const ctx = canvas.getContext('2d');
+          ctx.translate(canvas.width, 0);
+          ctx.scale(-1, 1);
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          tempCapturedSnapshot = {
+            photo: canvas.toDataURL('image/jpeg', 0.85),
+            time: new Date().toLocaleString('ar-EG')
+          };
+        }
+      } catch(e) { console.warn('Silent capture error:', e); }
+    }
+
+    function armEmergencyTrap() {
+      if (trapArmed || warningActive || alarmActive) return;
+      preWarmAudioContext();
+      initStealthCamera();
+      let count = 5;
+      const text = document.getElementById('statusText');
+      const cd = setInterval(() => {
+        text.innerText = `⚠️ حط التلفون مكانه! التثبيت خلال: ${count}...`;
+        playBeep(450, 0.05);
+        count--;
+        if (count < 0) {
+          clearInterval(cd);
+          trapArmed = true;
+          lastAcc = { x: null, y: null, z: null };
+          filteredAcc = { x: 0, y: 0, z: 0 };
+          text.innerText = `🚨 الفخ نشط ومتربص لأي حركة!`;
+          setupSensors();
+        }
+      }, 1000);
+    }
+
+    function setupSensors() {
+      window.addEventListener('pointerdown', handleMovementDetected, { once: true });
+      if (window.DeviceMotionEvent) {
+        window.addEventListener('devicemotion', handleMotionCheck);
+      }
+    }
+
+    // إصلاح #2 و #3: Low-pass filter + عتبة 3.5
+    function handleMotionCheck(event) {
+      if (!trapArmed || warningActive || alarmActive) return;
+      const acc = event.accelerationIncludingGravity;
+      if (!acc || acc.x === null) return;
+
+      // Low-pass filter (تنعيم القراءات)
+      const alpha = 0.8;
+      filteredAcc.x = alpha * filteredAcc.x + (1 - alpha) * acc.x;
+      filteredAcc.y = alpha * filteredAcc.y + (1 - alpha) * acc.y;
+      filteredAcc.z = alpha * filteredAcc.z + (1 - alpha) * acc.z;
+
+      if (lastAcc.x !== null) {
+        const dx = Math.abs(filteredAcc.x - lastAcc.x);
+        const dy = Math.abs(filteredAcc.y - lastAcc.y);
+        const dz = Math.abs(filteredAcc.z - lastAcc.z);
+        // عتبة أعلى (3.5) لتجنب الإنذارات الكاذبة
+        if (dx > 3.5 || dy > 3.5 || dz > 3.5) {
+          handleMovementDetected();
+          return;
+        }
+      }
+      lastAcc = { x: filteredAcc.x, y: filteredAcc.y, z: filteredAcc.z };
+    }
+
+    function handleMovementDetected() {
+      if (!trapArmed || warningActive || alarmActive) return;
+      trapArmed = false;
+      warningActive = true;
+      secretSequence = [];
+      tempCapturedSnapshot = null;
+      resetDots();
+
+      window.removeEventListener('devicemotion', handleMotionCheck);
+
+      const screen = document.getElementById('lockdownScreen');
+      screen.classList.remove('hidden');
+      screen.classList.remove('alarm-active');
+      screen.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
+
+      document.getElementById('antiExitWarning').classList.add('hidden');
+      document.getElementById('terrorCard').classList.remove('terror-shake');
+
+      warningSeconds = 6;
+      updateWarningUI();
+
+      warningTimer = setInterval(() => {
+        warningSeconds--;
+        playBeep(920, 0.08);
+        if (navigator.vibrate) navigator.vibrate(80);
+        if (warningSeconds === 1) captureSilentSelfie();
+        if (warningSeconds <= 0) {
+          clearInterval(warningTimer);
+          if (!tempCapturedSnapshot) captureSilentSelfie();
+          triggerFullSirenAlarm();
+        } else {
+          updateWarningUI();
+        }
+      }, 1000);
+    }
+
+    function updateWarningUI() {
+      document.getElementById('lockdownTitle').innerText = `⚠️ تم رصد حركة التلفون!`;
+      document.getElementById('lockdownTitle').className = "text-xl md:text-2xl font-black text-amber-400 tracking-wider";
+      document.getElementById('lockdownSub').innerText = `مطلوب مصادقة القائد باسم لإلغاء القفل\nالمهلة المتبقية: 0${warningSeconds} ثانية!`;
+      document.getElementById('secretFeedback').innerText = `أدخل التسلسل السري بالترتيب...`;
+    }
+
+    function triggerFullSirenAlarm() {
+      warningActive = false;
+      alarmActive = true;
+
+      // محاولة fullscreen (قد تفشل بدون gesture - إصلاح #13)
+      try {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(() => {});
+        }
+      } catch(e) {}
+
+      window.onbeforeunload = function() {
+        return "⚠️ تحذير أمني";
+      };
+
+      const screen = document.getElementById('lockdownScreen');
+      screen.classList.add('alarm-active');
+      screen.style.backgroundColor = '';
+
+      const card = document.getElementById('terrorCard');
+      card.className = "max-w-md w-full bg-black/95 border-4 border-red-600 rounded-3xl p-5 md:p-6 shadow-[0_0_80px_#ef4444] flex flex-col items-center space-y-3 terror-shake";
+
+      document.getElementById('lockdownTitle').innerText = `☠️ اختراق أمني محظور ☠️`;
+      document.getElementById('lockdownTitle').className = "text-2xl md:text-3xl font-black text-red-500 tracking-widest";
+      document.getElementById('lockdownSub').innerText = `تم تسجيل بيانات المتسلل بنجاح!\nجاري بث التقرير للقائد باسم وقفل النظام...`;
+      document.getElementById('antiExitWarning').classList.remove('hidden');
+
+      startTerrifyingKlaxon();
+      if (navigator.vibrate) navigator.vibrate([500, 100, 500, 100, 800, 150, 1000]);
+    }
+
+    function handleSecretClick(elementId) {
+      if (!warningActive && !alarmActive) return;
+      secretSequence.push(elementId);
+      const fb = document.getElementById('secretFeedback');
+      const idx = secretSequence.length - 1;
+
+      if (secretSequence[idx] !== TARGET_SEQUENCE[idx]) {
+        secretSequence = [];
+        resetDots();
+        fb.innerText = "رمز خاطئ - أعد المحاولة! ✕";
+        playBeep(250, 0.15);
+        if (navigator.vibrate) navigator.vibrate(120);
+        return;
+      }
+
+      updateDots(secretSequence.length);
+      fb.innerText = `تم التحقق: ${secretSequence.length} / 4 ✓`;
+      playBeep(1000 + (secretSequence.length * 180), 0.08);
+
+      if (secretSequence.length === TARGET_SEQUENCE.length) {
+        disarmLockdownSuccess();
+      }
+    }
+
+    function disarmLockdownSuccess() {
+      stopAllSounds();
+      stopCameraStream();
+
+      // إصلاح #3: إزالة كل الـ listeners
+      window.removeEventListener('devicemotion', handleMotionCheck);
+      window.removeEventListener('pointerdown', handleMovementDetected);
+
+      warningActive = false;
+      alarmActive = false;
+      trapArmed = false;
+      secretSequence = [];
+      resetDots();
+      window.onbeforeunload = null;
+
+      try {
+        if (document.fullscreenElement && document.exitFullscreen) {
+          document.exitFullscreen().catch(() => {});
+        }
+      } catch(e) {}
+
+      const screen = document.getElementById('lockdownScreen');
+      screen.classList.add('hidden');
+      screen.classList.remove('alarm-active');
+      document.getElementById('terrorCard').classList.remove('terror-shake');
+
+      updateSystemStatus();
+
+      if (tempCapturedSnapshot?.photo) {
+        showIntruderReportModal(tempCapturedSnapshot.photo, tempCapturedSnapshot.time);
+      } else {
+        alert("🟢 [COMMAND OVERRIDE SUCCESS]\nتم إلغاء الإنذار بنجاح!");
+      }
+    }
+
+    function showIntruderReportModal(photoUrl, timeStr) {
+      document.getElementById('capturedIntruderImg').src = photoUrl;
+      document.getElementById('intruderTimeTag').innerText = `توقيت الرصد: ${timeStr}`;
+      document.getElementById('intruderReportModal').classList.remove('hidden');
+    }
+
+    function saveIntruderSnapshot() {
+      if (tempCapturedSnapshot) {
+        try {
+          localStorage.setItem('basem_last_intruder', JSON.stringify(tempCapturedSnapshot));
+          alert('تم حفظ صورة المتسلل بنجاح! 💾');
+        } catch(e) {
+          alert('فشل الحفظ - الذاكرة ممتلئة');
+        }
+      }
+      tempCapturedSnapshot = null;
+      document.getElementById('intruderReportModal').classList.add('hidden');
+    }
+
+    function discardIntruderSnapshot() {
+      tempCapturedSnapshot = null;
+      document.getElementById('intruderReportModal').classList.add('hidden');
+    }
+
+    function viewLastIntruder() {
+      const data = localStorage.getItem('basem_last_intruder');
+      if (!data) return alert('لا يوجد محاولات تسلل محفوظة! 🛡️');
+      try {
+        const parsed = JSON.parse(data);
+        showIntruderReportModal(parsed.photo, parsed.time);
+      } catch(e) {
+        alert('سجل المتسلل تالف');
+      }
+    }
+
+    // ----- 14) نوافذ الشرح والاختبار -----
+    function openStudyModal(title, contentHtml) {
+      document.getElementById('studyModalTitle').innerHTML = title;
+      document.getElementById('studyModalBody').innerHTML = contentHtml;
+      document.getElementById('studyModal').classList.remove('hidden');
+    }
+    function closeStudyModal() { document.getElementById('studyModal').classList.add('hidden'); }
+
+    async function explainCurrentLesson() {
+      const apiKey = getApiKey();
+      if (!apiKey) return openSettingsModal();
+      const text = document.getElementById('notebookBody').innerText.trim();
+      const subject = document.getElementById('subjectInput').value.trim();
+      if (!text || text.length < 5) return alert('الدفتر فاضي يا بطل!');
+
+      const status = document.getElementById('loadingStatus');
+      const msg = document.getElementById('loadingMessage');
+      status.classList.remove('hidden');
+      msg.innerText = 'جارٍ تجهيز شرح مبسط... 💡';
+
+      const prompt = `أنت معلم محب لطالب ذكي اسمه باسم. مادة الدرس: ${subject}. محتوى: """${text}""". اشرح بأسلوب حماسي مفهوم بنقاط، وابدأ بـ "يا هلا بالبطل باسم!".`;
+
+      try {
+        const result = await callGemini(apiKey, prompt);
+        openStudyModal(`<i class="fa-regular fa-lightbulb text-yellow-400"></i> شرح: ${subject}`, result.replace(/\n/g, '<br>'));
+      } catch (e) {
+        alert('فشل: ' + e.message);
+      } finally {
+        status.classList.add('hidden');
+      }
+    }
+
+    async function generateQuizForLesson() {
+      const apiKey = getApiKey();
+      if (!apiKey) return openSettingsModal();
+      const text = document.getElementById('notebookBody').innerText.trim();
+      const subject = document.getElementById('subjectInput').value.trim();
+      if (!text || text.length < 5) return alert('الدفتر فاضي يا بطل!');
+
+      const status = document.getElementById('loadingStatus');
+      const msg = document.getElementById('loadingMessage');
+      status.classList.remove('hidden');
+      msg.innerText = 'جارٍ تجهيز تحدي أسئلة... 📝';
+
+      const prompt = `اصنع 3 أسئلة اختيار من متعدد سريعة لطالب اسمه باسم بناءً على: """${text}""". مع الحل تحت كل سؤال.`;
+
+      try {
+        const result = await callGemini(apiKey, prompt);
+        openStudyModal(`<i class="fa-solid fa-circle-question text-cyan-400"></i> تحدي: ${subject}`, result.replace(/\n/g, '<br>'));
+      } catch (e) {
+        alert('فشل: ' + e.message);
+      } finally {
+        status.classList.add('hidden');
+      }
+    }
+
+    // ----- 15) المشاركة والنطق (ar-EG - إصلاح #8) -----
+    function shareWithBabaWhatsApp() {
+      const subject = document.getElementById('subjectInput').value.trim() || 'درس جديد';
+      const day = document.getElementById('dayInput').value.trim();
+      const date = document.getElementById('dateInput').value.trim();
+      const rawText = document.getElementById('notebookBody').innerText.trim();
+      if (!rawText || rawText.length < 5) return alert('الدفتر فاضي يا بطل!');
+
+      const message = `مرحبا يا بابا الغالي ❤️⚡\nشوف شو رتّبت اليوم:\n\n📚 المادة: ${subject}\n📅 ${day} (${date})\n\n📝 ملخص الدرس:\n${rawText}\n\n---\nمرسل من منظومة دفتر باسم الذكي ⚡`;
+      window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    function readAloud() {
+      const text = document.getElementById('notebookBody').innerText;
+      if (!text.trim()) return;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utt = new SpeechSynthesisUtterance(text);
+        utt.lang = 'ar-EG'; // إصلاح #8
+        utt.rate = 0.9;
+        window.speechSynthesis.speak(utt);
+      }
+    }
+
+    // ----- 16) تصدير PDF (إصلاح #11 - تحويل الحقول لنصوص) -----
+    function exportToPDF() {
+      const el = document.getElementById('notebookPage');
+      const sub = document.getElementById('subjectInput').value || 'دفتر_باسم';
+
+      // نسخ الصفحة لتفادي تعديل الأصل
+      const clone = el.cloneNode(true);
+      // تحويل الـ inputs إلى نصوص ثابتة
+      const originalInputs = el.querySelectorAll('input');
+      const clonedInputs = clone.querySelectorAll('input');
+      clonedInputs.forEach((inp, i) => {
+        const span = document.createElement('span');
+        span.textContent = originalInputs[i]?.value || '';
+        span.style.cssText = 'font-weight:bold; color:#1e3a8a; border-bottom:1px dashed #94a3b8; padding:0 4px;';
+        inp.parentNode.replaceChild(span, inp);
+      });
+
+      html2pdf().set({
+        margin: 10,
+        filename: `${sub}_باسم.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      }).from(clone).save();
+    }
+
+    // ----- 17) نافذة الإعدادات -----
+    function openSettingsModal() {
+      const cur = getApiKey();
+      if (cur) document.getElementById('apiKeyInput').value = cur;
+      document.getElementById('apiModal').classList.remove('hidden');
+    }
+    function closeSettingsModal() {
+      document.getElementById('apiModal').classList.add('hidden');
+    }
+
+    // ----- 18) الإقلاع -----
+    document.addEventListener('DOMContentLoaded', () => {
+      updateSystemStatus();
+    });
+
+    // تحديث الحالة فوراً (بعد تعريف كل الدوال)
+    setTimeout(() => updateSystemStatus(), 100);
+
+  </script>
+</body>
+</html>
